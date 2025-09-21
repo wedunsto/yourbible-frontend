@@ -52,4 +52,4 @@ YourFinance is a **progressive web application (PWA)** designed to help users ta
 ```bash
 cd yourfinance-frontend
 npm install
-npm run start
+ionic serve
