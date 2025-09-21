@@ -36,7 +36,7 @@
               }
             ],
             "styles": ["src/styles.css","src/global.scss", "src/theme/variables.scss"],
-            "scripts": [],
+            "scripts": ["node_modules/flowbite/dist/flowbite.min.js"],
             "browser": "src/main.ts"
           },
           "configurations": {
