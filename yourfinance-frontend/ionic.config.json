@@ -1,0 +1,7 @@
+{
+  "name": "yourfinance-frontend",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
