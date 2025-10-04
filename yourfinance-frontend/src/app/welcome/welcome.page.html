@@ -1,0 +1,23 @@
+<ion-content [fullscreen]="true">
+  <ion-text>
+    <h1>YourBudget</h1>
+  </ion-text>
+  <ion-text>
+    <h2>Master Your Finances, Achieve Your Goals</h2>
+  </ion-text>
+  <ion-text>
+    <p>Enter your email to register or login</p>
+  </ion-text>
+  <form [formgroup]="emailForm" (ngSubmit)="onContinue()">
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input
+        type="email"
+        formControlName="email">
+      </ion-input>
+    </ion-item>
+    <ion-button
+      type="submit"
+      expand="block">Continue</ion-button>
+  </form>
+</ion-content>
