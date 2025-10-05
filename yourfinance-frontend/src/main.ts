@@ -5,10 +5,6 @@ import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalo
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
 
-bootstrapApplication(AppComponent, {
-  providers: [
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    provideIonicAngular(),
-    provideRouter(routes, withPreloading(PreloadAllModules)),
-  ],
-});
+import { appConfig } from './app/app.config';
+
+bootstrapApplication(AppComponent, appConfig);

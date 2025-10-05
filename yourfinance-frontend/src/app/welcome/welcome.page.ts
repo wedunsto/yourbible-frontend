@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { 
   IonContent,
   IonText,
@@ -10,6 +10,7 @@ import {
   IonButton
 } from '@ionic/angular/standalone';
 import { FormBuilder, Validators } from '@angular/forms';
+import { UserExistsService } from '../core/services/authentication/userExists.service';
 
 @Component({
   selector: 'app-welcome',
@@ -24,11 +25,14 @@ import { FormBuilder, Validators } from '@angular/forms';
     IonInput,
     IonButton,
     CommonModule,
+    ReactiveFormsModule,
     FormsModule
   ]
 })
 export class WelcomePage implements OnInit {
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+    private userExistsService: UserExistsService
+  ) { }
 
   emailForm = this.fb.group({
     email:['', [Validators.required, Validators.email]]

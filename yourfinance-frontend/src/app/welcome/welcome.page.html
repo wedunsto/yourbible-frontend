@@ -8,7 +8,7 @@
   <ion-text>
     <p>Enter your email to register or login</p>
   </ion-text>
-  <form [formgroup]="emailForm" (ngSubmit)="onContinue()">
+  <form [formGroup]="emailForm">
     <ion-item>
       <ion-label position="floating">Email</ion-label>
       <ion-input
