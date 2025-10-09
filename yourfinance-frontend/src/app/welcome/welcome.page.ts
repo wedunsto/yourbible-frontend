@@ -11,8 +11,10 @@ import {
   IonImg,
 } from '@ionic/angular/standalone';
 import { FormBuilder, Validators } from '@angular/forms';
-import { UserExistsService } from '../core/services/authentication/userExists.service';
 import { Router } from '@angular/router';
+import { selectExists } from '../core/states/authentication/welcome/welcome.feature';
+import { Store } from '@ngrx/store';
+import { userExistsChecked } from '../core/states/authentication/welcome/welcome.actions';
 
 @Component({
   selector: 'app-welcome',
@@ -34,7 +36,7 @@ import { Router } from '@angular/router';
 })
 export class WelcomePage {
   constructor(private fb: FormBuilder,
-    private userExistsService: UserExistsService,
+    private store: Store,
     private router: Router
   ) { }
 
@@ -43,20 +45,21 @@ export class WelcomePage {
 
     if(!username) return;
 
-    this.userExistsService.getUserExists(username).subscribe(
-      (exists: boolean) => {
-        if (exists) {
-          // this.router.navigation(['/login']);
-          console.log('Username already exists');
-        } else {
-          // this.router.navigation(['/register']);
-          console.log('Username available');
-        }
-      }
-    );
+    this.store.dispatch(userExistsChecked({ username, exists: false }));
   }
 
   usernameForm = this.fb.group({
     username: ['', [Validators.required]]
   });
+
+  ngOnInit() {
+    // Subscribe to the store's selector (auto-updated by reducer)
+    this.store.select(selectExists).subscribe ((exists: boolean) => {
+      if (exists) {
+        console.log('Navigate to login');
+      } else {
+        console.log('Navigate to regiser');
+      }
+    })
+  }
 }
