@@ -1,7 +1,11 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { environment } from '../../../environments/environment';
-import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { map, Observable } from 'rxjs';
+
+interface userExistsResponse {
+	exists: boolean;
+}
 
 @Injectable({ providedIn: 'root'})
 export class UserExistsService {
@@ -15,6 +19,10 @@ export class UserExistsService {
 	 * @returns Observable<boolean>
 	 */
 	public getUserExists(username: string): Observable<boolean> {
-		return this.http.get<boolean>(`${this.base}${this.userExistsEndpoint}`, { params: { username } });
+		const params = new HttpParams().set('username', username);
+		
+		// Check if the user exists, store the result in the returned observable
+		return this.http.get<userExistsResponse>(`${this.base}${this.userExistsEndpoint}`, { params })
+		.pipe(map((res) => res.exists));;
 	}
 }

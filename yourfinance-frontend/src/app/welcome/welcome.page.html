@@ -1,23 +1,34 @@
 <ion-content [fullscreen]="true">
-  <ion-text>
-    <h1>YourBudget</h1>
-  </ion-text>
-  <ion-text>
-    <h2>Master Your Finances, Achieve Your Goals</h2>
-  </ion-text>
-  <ion-text>
-    <p>Enter your email to register or login</p>
-  </ion-text>
-  <form [formGroup]="emailForm">
-    <ion-item>
-      <ion-label position="floating">Email</ion-label>
-      <ion-input
-        type="email"
-        formControlName="email">
-      </ion-input>
-    </ion-item>
-    <ion-button
-      type="submit"
-      expand="block">Continue</ion-button>
-  </form>
+  <div class="header">
+    <ion-img
+      class="header-image"
+      src="assets/images/yourzone-logo-dark.png"></ion-img>
+    <ion-text class="header-text">
+      <h1>YourBudget</h1>
+    </ion-text>
+    <ion-text class="sub-header-text">
+      <h2>Master Your Finances, Achieve Your Goals</h2>
+    </ion-text>
+  </div>
+  <div class="username-check">
+    <ion-text class="welcome-instructions">
+      <p>Enter your username to register or login</p>
+    </ion-text>
+    <form
+      [formGroup]="usernameForm"
+      class="username-form">
+      <ion-item>
+        <ion-label position="floating">Username</ion-label>
+        <ion-input
+          type="text"
+          formControlName="username">
+        </ion-input>
+      </ion-item>
+      <ion-button
+        type="submit"
+        expand="block"
+        class="username-check-button"
+        (click)="onContinue()">Continue</ion-button>
+    </form>
+  </div>
 </ion-content>
