@@ -1,5 +1,5 @@
 import { createFeature, createReducer, on } from "@ngrx/store";
-import { userExistsChecked } from "./welcome.actions";
+import { userExistsResult } from "./welcome.actions";
 
 export interface WelcomeState {
     username: string,
@@ -24,7 +24,7 @@ export const WelcomeFeature = createFeature({
     name: 'welcome',
     reducer: createReducer(
         initialState,
-        on(userExistsChecked, updateState)
+        on(userExistsResult, updateState)
     ),
 });
 

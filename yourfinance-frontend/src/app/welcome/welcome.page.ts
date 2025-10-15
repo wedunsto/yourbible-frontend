@@ -45,7 +45,7 @@ export class WelcomePage {
 
     if(!username) return;
 
-    this.store.dispatch(userExistsChecked({ username, exists: false }));
+    this.store.dispatch(userExistsChecked({ username }));
   }
 
   usernameForm = this.fb.group({
@@ -55,6 +55,9 @@ export class WelcomePage {
   ngOnInit() {
     // Subscribe to the store's selector (auto-updated by reducer)
     this.store.select(selectExists).subscribe ((exists: boolean) => {
+      const username = this.usernameForm.get('username')?.value?.trim();
+      if(!username) return;
+
       if (exists) {
         console.log('Navigate to login');
       } else {
