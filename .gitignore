@@ -14,6 +14,7 @@
 
 # Environment files
 /.env
+/src/environments
 
 # Angular CLI and build artefacts
 /.angular-cli.json
@@ -26,3 +27,16 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Capacitor build folders
+android/
+ios/
+electron/
+
+# Capacitor config backups
+capacitor.config.json.backup*
+capacitor.config.ts.backup*
+
+# Build output
+www/
+dist/
