@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  Validators,
+  FormsModule,
+  ReactiveFormsModule
+} from '@angular/forms';
 import { 
   IonContent,
   IonText,
@@ -10,11 +15,11 @@ import {
   IonButton,
   IonImg,
 } from '@ionic/angular/standalone';
-import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { selectExists } from '../core/states/authentication/welcome/welcome.feature';
 import { Store } from '@ngrx/store';
 import { userExistsChecked } from '../core/states/authentication/welcome/welcome.actions';
+import { AuthHeaderComponent } from '../components/auth-header/auth-header.component';
 
 @Component({
   selector: 'app-welcome',
@@ -31,7 +36,8 @@ import { userExistsChecked } from '../core/states/authentication/welcome/welcome
     IonImg,
     CommonModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    AuthHeaderComponent
   ]
 })
 export class WelcomePage {
@@ -40,28 +46,23 @@ export class WelcomePage {
     private router: Router
   ) { }
 
-  onContinue = () => {
-    const username = this.usernameForm.get('username')?.value?.trim();
-
-    if(!username) return;
-
-    this.store.dispatch(userExistsChecked({ username }));
-  }
-
   usernameForm = this.fb.group({
     username: ['', [Validators.required]]
   });
 
-  ngOnInit() {
+  onContinue = () => {
+    const username = this.usernameForm.get('username')?.value?.trim();
+    if(!username) return;
+
+    this.store.dispatch(userExistsChecked({ username }));
+
     // Subscribe to the store's selector (auto-updated by reducer)
     this.store.select(selectExists).subscribe ((exists: boolean) => {
-      const username = this.usernameForm.get('username')?.value?.trim();
-      if(!username) return;
 
       if (exists) {
         console.log('Navigate to login');
       } else {
-        console.log('Navigate to regiser');
+        this.router.navigate(['/register']); 
       }
     })
   }

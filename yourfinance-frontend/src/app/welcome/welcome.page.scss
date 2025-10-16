@@ -4,23 +4,10 @@ ion-content {
     --padding-bottom: 2rem;
     --padding-start: 2rem;
 
-    .header {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 4rem;
-
-        align-items: center;
-
-        ion-img.header-image {
-            width: 6rem;
-            height: 6rem;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-    }
     ion-text.welcome-instructions {
         text-align: center;
     }
+
     .username-check {
         display: flex;
         flex-direction: column;

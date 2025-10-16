@@ -1,0 +1,14 @@
+.header {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 4rem;
+
+        align-items: center;
+
+        ion-img.header-image {
+            width: 6rem;
+            height: 6rem;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+    }
