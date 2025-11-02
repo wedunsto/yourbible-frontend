@@ -14,7 +14,7 @@ export class UserExistsService {
 	private userExistsEndpoint = environment.endpoints.userExists;
 
     /**
-	 * Check if a username exists on the database
+	 * Check if a username exists in the database
 	 * @param username: The username to check
 	 * @returns Observable<boolean>
 	 */
@@ -23,6 +23,6 @@ export class UserExistsService {
 		
 		// Check if the user exists, store the result in the returned observable
 		return this.http.get<userExistsResponse>(`${this.base}${this.userExistsEndpoint}`, { params })
-		.pipe(map((res) => res.exists));;
+		.pipe(map((res) => res.exists));
 	}
 }

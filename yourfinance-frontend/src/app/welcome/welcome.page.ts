@@ -41,7 +41,8 @@ import { AuthHeaderComponent } from '../components/auth-header/auth-header.compo
   ]
 })
 export class WelcomePage {
-  constructor(private fb: FormBuilder,
+  constructor(
+    private fb: FormBuilder,
     private store: Store,
     private router: Router
   ) { }

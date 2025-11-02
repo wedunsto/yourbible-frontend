@@ -23,6 +23,9 @@ import {
 import { AuthHeaderComponent } from '../components/auth-header/auth-header.component';
 import { Store } from '@ngrx/store';
 import { selectUsername } from '../core/states/authentication/welcome/welcome.feature';
+import { RegisterService } from '../core/services/authentication/register/register.service';
+import { Router } from '@angular/router';
+import { accountCreated } from '../core/states/authentication/register/register.actions';
 
 @Component({
   selector: 'app-register',
@@ -48,8 +51,10 @@ import { selectUsername } from '../core/states/authentication/welcome/welcome.fe
 
 export class RegisterPage implements OnInit {
 
-  constructor(private fb: FormBuilder,
-    private store: Store
+  constructor(
+    private fb: FormBuilder,
+    private store: Store,
+    private router: Router
   ) { }
 
   // Initialize the registration form
@@ -94,9 +99,11 @@ export class RegisterPage implements OnInit {
 
   registerAccount = (): void => {
     if (!this.registerForm.valid) {
-      console.log('Invalid');
+      // TODO: Build invalid styling and text to display
     } else {
-      console.log('Valid');
+      const username = this.registerForm.get('username')?.value?.trim();
+      const password = this.registerForm.get('password')?.value?.trim();
+      this.store.dispatch(accountCreated({ username, password }))
     }
   }
 }

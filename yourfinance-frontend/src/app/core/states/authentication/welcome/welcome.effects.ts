@@ -11,7 +11,7 @@ export class WelcomeEffects {
         private userExistsService: UserExistsService
     ) {}
 
-    // Main effect: bridges the store and backend
+    // Main effect: bridges the store and back-end
   checkUserExists$ = createEffect(() =>
     this.actions$.pipe(
       ofType(userExistsChecked), // Listen for the checked action
