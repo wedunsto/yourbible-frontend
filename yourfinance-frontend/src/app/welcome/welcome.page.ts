@@ -13,7 +13,6 @@ import {
   IonItem,
   IonInput,
   IonButton,
-  IonImg,
 } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { selectExists } from '../core/states/authentication/welcome/welcome.feature';
@@ -33,7 +32,6 @@ import { AuthHeaderComponent } from '../components/auth-header/auth-header.compo
     IonItem,
     IonInput,
     IonButton,
-    IonImg,
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
