@@ -1,5 +1,5 @@
 <u>Objectives</u>: Depict the flow of data when a user registers a new account
-
+ /Users/williamdunston/Documents/GitHub Repos/YourFinance/yourfinance-frontend/Architecture Documents/Sequence Diagrams/Register Page.md
 ```plantuml
 @startuml
 actor User
