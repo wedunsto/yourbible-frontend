@@ -18,9 +18,17 @@ ion-content {
             flex-direction: column;
             gap: 1rem;
 
+            .invalid-input {
+                --background: #d0242470;
+                --color: #ff0000;
+            }
+
             ion-button.username-check-button {
                 --background: lime;
             }
+        }
+        ion-text.error-text {
+            color: #ff0000;
         }
     }
 }
