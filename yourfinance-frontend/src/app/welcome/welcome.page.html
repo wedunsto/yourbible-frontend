@@ -1,15 +1,5 @@
 <ion-content [fullscreen]="true">
-  <div class="header">
-    <ion-img
-      class="header-image"
-      src="assets/images/yourzone-logo-dark.png"></ion-img>
-    <ion-text class="header-text">
-      <h1>YourBudget</h1>
-    </ion-text>
-    <ion-text class="sub-header-text">
-      <h2>Master Your Finances, Achieve Your Goals</h2>
-    </ion-text>
-  </div>
+  <app-auth-header></app-auth-header>
   <div class="username-check">
     <ion-text class="welcome-instructions">
       <p>Enter your username to register or login</p>
@@ -17,18 +7,33 @@
     <form
       [formGroup]="usernameForm"
       class="username-form">
-      <ion-item>
+      <ion-item
+        [ngClass]="{'invalid-input' : (isUsernameTooShort() || isUsernameNotModified()) && formSubmitted}">
         <ion-label position="floating">Username</ion-label>
         <ion-input
           type="text"
           formControlName="username">
         </ion-input>
       </ion-item>
+      <ion-text>
+        <p>Username must include:</p>
+        <p>At least 5 characters</p>
+      </ion-text>
       <ion-button
         type="submit"
         expand="block"
         class="username-check-button"
         (click)="onContinue()">Continue</ion-button>
     </form>
+    <ion-text
+      class="error-text"
+      *ngIf="(isUsernameTooShort() || isUsernameNotModified()) && formSubmitted">
+        @if(isUsernameNotModified()) {
+          <p>Please enter a username to register or login</p>
+        }
+        @else {
+          <p>Please enter a username with 5 or more characters</p>
+        }
+    </ion-text>
   </div>
 </ion-content>

@@ -12,9 +12,14 @@ User -> welcome : Enter username
 alt Username exists
     welcome -> login : Navigate to login page
 else Username does not exist
-    Welcome -> register : Navigate to registration page
+    welcome -> register : Navigate to registration page
+else Username empty
+	welcome -> welcome : Error styling
 end
 
 @enduml
 ```
 - If the user exists, auto fill in the username part of the log in page
+
+<u>Username Rules</u>:
+- Must be 5 or more characters

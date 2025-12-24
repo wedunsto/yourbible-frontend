@@ -7,7 +7,9 @@ import { provideStore, provideState } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { WelcomeFeature } from './core/states/authentication/welcome/welcome.feature';
+import { RegisterFeature } from './core/states/authentication/register/register.feature';
 import { WelcomeEffects } from './core/states/authentication/welcome/welcome.effects';
+import { RegisterEffects } from './core/states/authentication/register/register.effects';
 
 // Provide NgRx Store to the application
 export const appConfig: ApplicationConfig = {
@@ -20,6 +22,7 @@ export const appConfig: ApplicationConfig = {
     provideStore(),                     // root store
     provideStoreDevtools(),             // optional devtools
     provideState(WelcomeFeature),       // registers your welcome feature
-    provideEffects([WelcomeEffects]),   // optional effects
+    provideState(RegisterFeature),
+    provideEffects([WelcomeEffects, RegisterEffects]),   // optional effects
   ],
 };

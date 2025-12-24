@@ -1,6 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  Validators,
+  FormsModule,
+  ReactiveFormsModule,
+  AbstractControl,
+  ValidationErrors
+} from '@angular/forms';
 import { 
   IonContent,
   IonText,
@@ -8,13 +15,12 @@ import {
   IonItem,
   IonInput,
   IonButton,
-  IonImg,
 } from '@ionic/angular/standalone';
-import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { selectExists } from '../core/states/authentication/welcome/welcome.feature';
 import { Store } from '@ngrx/store';
 import { userExistsChecked } from '../core/states/authentication/welcome/welcome.actions';
+import { AuthHeaderComponent } from '../components/auth-header/auth-header.component';
 
 @Component({
   selector: 'app-welcome',
@@ -28,40 +34,72 @@ import { userExistsChecked } from '../core/states/authentication/welcome/welcome
     IonItem,
     IonInput,
     IonButton,
-    IonImg,
     CommonModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    AuthHeaderComponent
   ]
 })
-export class WelcomePage {
-  constructor(private fb: FormBuilder,
+
+export class WelcomePage implements OnInit {
+  constructor(
+    private fb: FormBuilder,
     private store: Store,
     private router: Router
   ) { }
 
-  onContinue = () => {
-    const username = this.usernameForm.get('username')?.value?.trim();
-
-    if(!username) return;
-
-    this.store.dispatch(userExistsChecked({ username }));
+  ngOnInit() {
+    this.usernameForm.get('username')?.valueChanges.subscribe(() => {
+    this.formSubmitted = false;
+  });
   }
 
+  formSubmitted: boolean = false;
+
+  // Ensure username has at least 5 characters
+  usernameValidation = (control: AbstractControl) => {
+  const username: string = control.value ?? '';
+  const errors: ValidationErrors = {};
+
+  if (username.length < 5) {
+    errors['minlength'] = true;
+  }
+
+  return Object.keys(errors).length ? errors :null;
+}
+
   usernameForm = this.fb.group({
-    username: ['', [Validators.required]]
+    username: ['', [Validators.required, this.usernameValidation]]
   });
 
-  ngOnInit() {
+  // Access the username form value
+  get usernameCtrl() {
+    return this.usernameForm.get('username');
+  }
+
+  // Access the username value error object. Check if the length is too short based on the username validation function
+  isUsernameTooShort() {
+    return !!this.usernameCtrl?.hasError('minlength');
+  }
+
+  isUsernameNotModified = () => {
+    return !!(!this.usernameCtrl?.touched && !this.usernameCtrl?.dirty);
+  }
+
+  onContinue = () => {
+    this.formSubmitted = true;
+    const username = this.usernameForm.get('username')?.value?.trim();
+    if(!username || this.isUsernameTooShort()) return;
+
+    this.store.dispatch(userExistsChecked({ username }));
+
     // Subscribe to the store's selector (auto-updated by reducer)
     this.store.select(selectExists).subscribe ((exists: boolean) => {
-      const username = this.usernameForm.get('username')?.value?.trim();
-      if(!username) return;
 
       if (exists) {
         console.log('Navigate to login');
       } else {
-        console.log('Navigate to regiser');
+        this.router.navigate(['/register']); 
       }
     })
   }
