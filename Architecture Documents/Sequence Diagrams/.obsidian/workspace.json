@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Welcome Page.md",
+                "file": "Register Page.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Welcome Page"
+              "title": "Register Page"
             }
           }
         ]
@@ -78,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "eb73129ec91585d4",
@@ -185,5 +184,7 @@
     }
   },
   "active": "43a7527f01ec3477",
-  "lastOpenFiles": []
+  "lastOpenFiles": [
+    "Welcome Page.md"
+  ]
 }
