@@ -6,7 +6,8 @@ import {
   Validators,
   ReactiveFormsModule,
   AbstractControl,
-  ValidationErrors} from '@angular/forms';
+  ValidationErrors,
+} from '@angular/forms';
 import {
   IonContent,
   IonLabel,

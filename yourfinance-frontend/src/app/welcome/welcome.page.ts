@@ -97,7 +97,7 @@ export class WelcomePage implements OnInit {
     this.store.select(selectExists).subscribe ((exists: boolean) => {
 
       if (exists) {
-        console.log('Navigate to login');
+        this.router.navigate(['/login']);
       } else {
         this.router.navigate(['/register']); 
       }
