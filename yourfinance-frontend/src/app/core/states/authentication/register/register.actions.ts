@@ -3,7 +3,7 @@
 
 import { createAction, props } from "@ngrx/store";
 
-// to persist account credentials
+// Request: To persist account credentials
 export const accountCreated = createAction(
     '[Auth API] Account Created',
     props<{ username: string, password: string}>()

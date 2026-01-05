@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { UserExistsService } from "src/app/core/services/authentication/userExists.service";
 import { userExistsChecked, userExistsResult } from "./welcome.actions";
 import { catchError, map, of, switchMap } from "rxjs";
+import { UserExistsService } from "src/app/core/services/user-exists/user-exists.service";
 
 @Injectable()
 export class WelcomeEffects {

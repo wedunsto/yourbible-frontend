@@ -17,10 +17,13 @@ import {
   IonButton,
   IonLabel,
   IonItem,
+  IonInput
 } from '@ionic/angular/standalone';
 import { AuthHeaderComponent } from '../components/auth-header/auth-header.component';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { LoginState, selectLoginState } from '../core/states/authentication/login/login.feature';
+import { selectUsername } from '../core/states/authentication/welcome/welcome.feature';
 
 @Component({
   selector: 'app-login',
@@ -36,13 +39,16 @@ import { Store } from '@ngrx/store';
     IonButton,
     IonLabel,
     IonItem,
+    IonInput,
     CommonModule,
     FormsModule,
     AuthHeaderComponent,
     ReactiveFormsModule,
   ]
 })
+
 export class LoginPage implements OnInit {
+  
   formSubmitted: boolean = false;
 
   constructor(
@@ -60,6 +66,16 @@ export class LoginPage implements OnInit {
       username: ['', [Validators.required]],
       password: ['', [Validators.required]]
     });
+
+    // Subscribe to the store's selectors
+    this.store.select(selectUsername).subscribe((username: string) => {
+      // Update the username value
+      this.loginForm.get('username')?.setValue(username);
+    });
+
+    this.store.select(selectLoginState).subscribe(({accessToken, accountStatus}: LoginState) => {
+        console.log(accessToken, accountStatus);
+    });
   }
 
   get usernameCtrl() {
@@ -70,9 +86,11 @@ export class LoginPage implements OnInit {
     return this.loginForm.get('password');
   }
 
-  isPasswordModified(): boolean {
-    return !!(this.passwordCtrl?.dirty || this.passwordCtrl?.touched);
-  }
+  /**
+   *  isPasswordModified(): boolean {
+   *   return !!(this.passwordCtrl?.dirty || this.passwordCtrl?.touched);
+   *  }
+   */
 
   loginAccount(): void {
     this.formSubmitted = true;

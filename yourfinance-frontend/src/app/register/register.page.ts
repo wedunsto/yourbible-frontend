@@ -63,10 +63,10 @@ export class RegisterPage implements OnInit {
     }, { validators: this.confirmPasswordValidation });
 
     // Subscribe to the store's selector
-    this.store.select(selectUsername).subscribe ((username: string) => {
-      // update the username value
+    this.store.select(selectUsername).subscribe((username: string) => {
+      // Update the username value
       this.registerForm.get('username')?.setValue(username);
-    })
+    });
 
     // Reset the styling on the password field when the user modifies the value
     this.registerForm.get('password')?.valueChanges.subscribe(() => {

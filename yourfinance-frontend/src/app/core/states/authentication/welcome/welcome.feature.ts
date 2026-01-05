@@ -3,13 +3,13 @@ import { userExistsResult } from "./welcome.actions";
 
 export interface WelcomeState {
     username: string,
-    exists: boolean
+    exists: boolean | null
 }
 
 // Initial state provided to the NgRx store
 const initialState: WelcomeState = {
     username: '',
-    exists: false
+    exists: null
 }
 
 // The reducer uses this function to update the state of username and exists values

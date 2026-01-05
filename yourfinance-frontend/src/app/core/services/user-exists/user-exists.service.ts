@@ -6,9 +6,8 @@ import { map, Observable } from 'rxjs';
 interface userExistsResponse {
 	exists: boolean;
 }
-@Injectable({
-  providedIn: 'root'
-})
+
+@Injectable({providedIn: 'root'})
 export class UserExistsService {
   private http = inject(HttpClient);
   private base = environment.apiBaseUrl;

@@ -21,6 +21,7 @@ import { selectExists } from '../core/states/authentication/welcome/welcome.feat
 import { Store } from '@ngrx/store';
 import { userExistsChecked } from '../core/states/authentication/welcome/welcome.actions';
 import { AuthHeaderComponent } from '../components/auth-header/auth-header.component';
+import { filter, take } from 'rxjs';
 
 @Component({
   selector: 'app-welcome',
@@ -94,8 +95,12 @@ export class WelcomePage implements OnInit {
     this.store.dispatch(userExistsChecked({ username }));
 
     // Subscribe to the store's selector (auto-updated by reducer)
-    this.store.select(selectExists).subscribe ((exists: boolean) => {
-
+    this.store.select(selectExists)
+    .pipe(
+      filter(exists => exists != null),
+      take(1))
+    .subscribe ((exists: boolean) => {
+      console.log(exists);
       if (exists) {
         this.router.navigate(['/login']);
       } else {

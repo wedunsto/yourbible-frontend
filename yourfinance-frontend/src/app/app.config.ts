@@ -8,8 +8,10 @@ import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { WelcomeFeature } from './core/states/authentication/welcome/welcome.feature';
 import { RegisterFeature } from './core/states/authentication/register/register.feature';
+import { LoginFeature } from './core/states/authentication/login/login.feature';
 import { WelcomeEffects } from './core/states/authentication/welcome/welcome.effects';
 import { RegisterEffects } from './core/states/authentication/register/register.effects';
+import { LoginEffects } from './core/states/authentication/login/login.effects';
 
 // Provide NgRx Store to the application
 export const appConfig: ApplicationConfig = {
@@ -23,6 +25,7 @@ export const appConfig: ApplicationConfig = {
     provideStoreDevtools(),             // optional devtools
     provideState(WelcomeFeature),       // registers your welcome feature
     provideState(RegisterFeature),
-    provideEffects([WelcomeEffects, RegisterEffects]),   // optional effects
+    provideState(LoginFeature),
+    provideEffects([WelcomeEffects, RegisterEffects, LoginEffects]),   // optional effects
   ],
 };
