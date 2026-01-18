@@ -1,0 +1,48 @@
+<ion-content [fullscreen]="true">
+  <app-auth-header></app-auth-header>
+  <div class="register">
+    <ion-text class="register-instructions">
+      <p>Create a new account</p>
+    </ion-text>
+    <form
+      [formGroup]="registerForm"
+      class="register-form">
+      <ion-item>
+        <ion-label position="floating">Username</ion-label>
+        <ion-input
+          type="text"
+          formControlName="username">
+        </ion-input>
+      </ion-item>
+      <ion-item
+        [ngClass]="{'invalid-input' : isPasswordInvalid() && isPasswordModified() && formSubmitted}">
+        <ion-label position="floating">Password</ion-label>
+        <ion-input
+          type="password"
+          formControlName="password">
+        </ion-input>
+      </ion-item>
+      <ion-text>
+        <p>Password must include:</p>
+        <ul>
+          <li>At least 8 characters</li>
+          <li>At least 1 uppercase letter</li>
+          <li>At least 1 lowercase letter</li>
+        </ul>
+      </ion-text>
+      <ion-item
+      [ngClass]="{'invalid-input' : isPasswordMismatch() && formSubmitted}">
+        <ion-label position="floating">Confirm Password</ion-label>
+        <ion-input
+          type="password"
+          formControlName="confirmPassword">
+        </ion-input>
+      </ion-item>
+      <ion-button
+        type="submit"
+        expand="block"
+        class="register-button"
+        (click)="registerAccount()">Register</ion-button>
+    </form>
+  </div>
+</ion-content>
