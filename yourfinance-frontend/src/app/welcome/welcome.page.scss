@@ -24,7 +24,8 @@ ion-content {
             }
 
             ion-button.username-check-button {
-                --background: lime;
+                --background: cyan;
+                color: black;
             }
         }
         ion-text.error-text {

@@ -100,7 +100,6 @@ export class WelcomePage implements OnInit {
       filter(exists => exists != null),
       take(1))
     .subscribe ((exists: boolean) => {
-      console.log(exists);
       if (exists) {
         this.router.navigate(['/login']);
       } else {

@@ -19,7 +19,8 @@ ion-content {
         gap: 1rem;
         
         ion-button.login-button {
-            --background: lime;
+            --background: cyan;
+            color: black;
         }
     }
 }

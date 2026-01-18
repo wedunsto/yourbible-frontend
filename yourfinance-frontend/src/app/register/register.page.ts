@@ -144,11 +144,11 @@ export class RegisterPage implements OnInit {
     this.formSubmitted = true;
 
     if (!this.registerForm.valid) {
-      // TODO: Build invalid styling and text to display
     } else {
       const username = this.registerForm.get('username')?.value?.trim();
       const password = this.registerForm.get('password')?.value?.trim();
-      this.store.dispatch(accountCreated({ username, password }))
+      this.store.dispatch(accountCreated({ username, password }));
+      this.router.navigate(['/login']);
     }
   }
 }
