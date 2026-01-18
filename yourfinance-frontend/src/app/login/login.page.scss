@@ -17,6 +17,11 @@ ion-content {
         display: flex;
         flex-direction: column;
         gap: 1rem;
+
+        .invalid-input {
+            --background: #d0242470;
+            --color: #ff0000;
+        }
         
         ion-button.login-button {
             --background: cyan;

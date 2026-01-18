@@ -9,8 +9,14 @@ export const accountAuthenticatedRequest = createAction(
     props<{ username: string, password: string}>()
 );
 
-// Response: Success or failure response from the back-end
-export const accountAuthenticatedResponse = createAction(
-    '[Auth API] Account Authenticated Response',
-    props<{accessToken: string, accountStatus: string}>()
+// Response: Success response from the back-end
+export const accountAuthenticatedSuccess = createAction(
+  '[Login] Account Authenticated Success',
+  props<{ accessToken: string; accountStatus: string }>()
+);
+
+// Reponse: Failure response from the back-end
+export const accountAuthenticatedFailure = createAction(
+  '[Login] Account Authenticated Failure',
+  props<{ error: unknown }>()
 );

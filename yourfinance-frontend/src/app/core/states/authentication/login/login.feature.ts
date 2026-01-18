@@ -2,17 +2,19 @@
 // Reducer: Update the state of access token and account status values
 // Selectors: Return the required value from the NgRx store
 import { createFeature, createReducer, on } from "@ngrx/store";
-import { accountAuthenticatedResponse } from "./login.actions";
+import { accountAuthenticatedSuccess, accountAuthenticatedFailure } from "./login.actions";
 
 export interface LoginState {
     accessToken: string,
-    accountStatus: string
+    accountStatus: string,
+    error: unknown | null,
 }
 
 // Initial state provided to the NgRx store
 const initialState: LoginState = {
     accessToken: '',
-    accountStatus: ''
+    accountStatus: '',
+    error: null,
 }
 
 // The reducer uses this function to update the state of username and account status values
@@ -27,8 +29,20 @@ export const LoginFeature = createFeature({
     name: 'login',
     reducer: createReducer(
         initialState,
-        on(accountAuthenticatedResponse, updateState)
-    ),
+        on(accountAuthenticatedSuccess, (state, { accessToken, accountStatus }) => ({
+            ...state,
+            accessToken,
+            accountStatus,
+            error: null
+        })),
+
+        on(accountAuthenticatedFailure, (state, { error }) => ({
+            ...state,
+            accessToken: '',
+            accountStatus: '',
+            error
+        }))
+        ),
 });
 
 /**
