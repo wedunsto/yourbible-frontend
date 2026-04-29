@@ -3,7 +3,7 @@ export interface BibleStudyNote {
 	chapter: number;
 	verseStart?: number;
 	verseEnd?: number;
-	studyCategoy: BibleStudyCategory[];
+	studyCategories: BibleStudyCategory[];
 	title: string;
 	notes: string;
 	studyDate: string;

@@ -8,7 +8,8 @@ export const environment = {
     endpoints: {
         userExists: '/users/exists',
         register: '/users/register',
-        login: '/users/login'
+        login: '/users/login',
+        bibleStudyNotes: '/bible-study-notes'
     }
 };
 
