@@ -10,9 +10,6 @@ import {
 } from '@angular/forms';
 import {
   IonContent,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
   IonText,
   IonButton,
   IonLabel,
@@ -33,9 +30,6 @@ import { accountAuthenticatedRequest } from '../core/states/authentication/login
   standalone: true,
   imports: [
     IonContent,
-    IonHeader,
-    IonTitle,
-    IonToolbar,
     IonText,
     IonButton,
     IonLabel,
