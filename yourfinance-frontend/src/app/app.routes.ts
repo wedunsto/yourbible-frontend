@@ -21,6 +21,10 @@ export const routes: Routes = [
     path: 'home',
     loadComponent: () => import('./home/home.page').then( m => m.HomePage)
   },
+  {
+    path: 'create-bible-study-note',
+    loadComponent: () => import('./create-bible-study-note/create-bible-study-note.page').then( m => m.CreateBibleStudyNotePage)
+  },
 
 
 ];

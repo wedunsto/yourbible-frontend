@@ -1,0 +1,43 @@
+<div class="form-input-item">
+  <p>{{ title() }}</p>
+  @if (type() === 'text') {
+    <ion-input
+      [placeholder]="placeholder()"
+      [value]="control()?.value ?? ''"
+      (ionInput)="control()?.setValue($event.detail.value ?? '')"
+      (ionBlur)="control()?.markAsTouched()">
+    </ion-input>
+  }
+  @if (type() === 'number') {
+    <ion-input
+      [placeholder]="placeholder()"
+      type="number"
+      [value]="control()?.value ?? ''"
+      (ionInput)="control()?.setValue($event.detail.value ?? '')"
+      (ionBlur)="control()?.markAsTouched()">
+    </ion-input>
+  }
+  @if (type() === 'category') {
+    <ion-list>
+      <ion-item>
+        <ion-select [placeholder]="placeholder()">
+          <ion-select-option value="test">Test</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+  }
+  @if (type() === 'date') {
+    <ion-datetime-button>
+    </ion-datetime-button>
+
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime
+          presentation="date"
+          [value]="control()?.value"
+          (ionChange)="control()?.setValue($event.detail.value)">
+        </ion-datetime>
+      </ng-template>
+    </ion-modal>
+  }
+</div>

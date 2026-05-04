@@ -1,8 +1,7 @@
 export interface BibleStudyNote {
 	book: string;
 	chapter: number;
-	verseStart?: number;
-	verseEnd?: number;
+	verses?: number[];
 	studyCategories: BibleStudyCategory[];
 	title: string;
 	notes: string;
