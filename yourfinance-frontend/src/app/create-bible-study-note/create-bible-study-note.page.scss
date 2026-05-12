@@ -1,0 +1,18 @@
+.create-form {
+  width: 100%;
+}
+
+.create-form form {
+  width: 100%;
+}
+
+.chapter-and-verses {
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+}
+
+.chapter-and-verses app-form-input {
+  flex: 1 1 0;
+  min-width: 0;
+}
