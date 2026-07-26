@@ -100,12 +100,7 @@ export class WelcomePage implements OnInit {
       filter(destination => destination != null),
       take(1))
     .subscribe ((destination: string) => {
-      console.log(destination)
-      if (destination) {
-        this.router.navigate(['/login']);
-      } else {
-        this.router.navigate(['/register']); 
-      }
+      this.router.navigate([destination]);
     })
   }
 }

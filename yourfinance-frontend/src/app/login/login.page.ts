@@ -67,10 +67,6 @@ export class LoginPage implements OnInit {
       // Update the username value
       this.loginForm.get('username')?.setValue(username);
     });
-
-    this.store.select(selectLoginState).subscribe(({accessToken, accountStatus}: LoginState) => {
-        console.log(accessToken, accountStatus);
-    });
   }
 
   usernameValidation = (control: AbstractControl): ValidationErrors | null => {
