@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 import { map, Observable } from 'rxjs';
 
 interface userExistsResponse {
-	exists: boolean;
+	destination: string;
 }
 
 @Injectable({providedIn: 'root'})
@@ -18,11 +18,14 @@ export class UserExistsService {
     * @param username: The username to check
     * @returns Observable<boolean>
     */
-  public getUserExists(username: string): Observable<boolean> {
+  public getUserExists(username: string): Observable<string> {
     const params = new HttpParams().set('username', username);
     
     // Check if the user exists, store the result in the returned observable
     return this.http.get<userExistsResponse>(`${this.base}${this.userExistsEndpoint}`, { params })
-    .pipe(map((res) => res.exists));;
+      .pipe(map((res) => {
+        return res.destination;
+      }
+    ));
   }
 }

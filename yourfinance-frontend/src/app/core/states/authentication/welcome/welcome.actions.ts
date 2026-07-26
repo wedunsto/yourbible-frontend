@@ -11,5 +11,5 @@ export const userExistsChecked = createAction(
 // False: Go to register screen
 export const userExistsResult = createAction(
     '[Auth API] User Exists Result',
-    props<{ username: string; exists: boolean }>()
+    props<{ username: string; destination: string }>()
 );

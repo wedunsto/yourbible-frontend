@@ -19,12 +19,12 @@ export class WelcomeEffects {
         this.userExistsService.getUserExists(username).pipe(
           // Map the backend result to another action,
           // Sending the user and exists status to the frontend
-          map((exists) => userExistsResult({ username, exists })),
+          map((destination) => userExistsResult({ username, destination })),
           // TODO: Handle errors
           catchError((error) => {
             console.error('Error checking user existence:', error);
             return of(
-              userExistsResult({ username, exists: false })
+              userExistsResult({ username, destination: '' })
             );
           })
         )
