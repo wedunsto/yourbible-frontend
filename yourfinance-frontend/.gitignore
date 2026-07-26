@@ -23,6 +23,18 @@ log.txt
 /platforms
 /plugins
 
+# Capacitor native platforms
+/android
+/ios
+
+# Environment files (contain API base URLs / IPs, not safe to commit)
+/src/environments
+
+# Local env/secret files
+.env
+.env.local
+.env.*.local
+
 # Compiled output
 /dist
 /tmp
