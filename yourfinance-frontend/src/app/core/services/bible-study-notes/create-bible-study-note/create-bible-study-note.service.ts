@@ -18,12 +18,14 @@ export interface CreateBibleStudyNoteResponse {
 export class CreateBibleStudyNote {
   private http = inject(HttpClient);
   private base = environment.apiBaseUrl;
-  private createBibleStudyNoteEndpoint = environment.endpoints.bibleStudyNotes;
+  private bibleStudyNoteEndpoint = environment.endpoints.bibleStudyNotes;
 
   public createBibleStudyNote(payload: CreateBibleStudyNoteRequest): Observable<CreateBibleStudyNoteResponse> {
     return this.http.post<CreateBibleStudyNoteResponse>(
-      `${this.base}${this.createBibleStudyNoteEndpoint}`,
-      payload
+      `${this.base}${this.bibleStudyNoteEndpoint}`,
+      {
+        "bibleStudyNote": payload.payload
+      }
     )
   }
 }

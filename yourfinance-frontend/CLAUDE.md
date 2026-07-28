@@ -42,7 +42,7 @@ Naming is not fully consistent across slices — e.g. `core/states/bible-study-n
 
 HTTP services live in `core/services/<domain>/<action>/`, are `providedIn: 'root'`, inject `HttpClient`, and build URLs from `environment.apiBaseUrl + environment.endpoints.<name>` (`src/environments/environment.ts` / `environment.prod.ts`, swapped via `fileReplacements` in `angular.json` production config). Each service file also declares its own request/response TypeScript interfaces (there's no separate DTO layer) — effects import these types directly from the service file.
 
-Note `environment.ts` (dev) and `environment.prod.ts` currently define different paths for the same logical endpoint (e.g. `userExists`) — check both when touching auth endpoints.
+Note `environment.ts` (dev) and `environment.prod.ts` currently define different paths for the same logical endpoint (e.g. `userExists` is `/users/userExists` vs. `/users/exists`, `bibleStudyNotes` is `/notes` vs. `/bible-study-notes`) — check both when touching an endpoint.
 
 ### Models vs. per-service DTOs
 

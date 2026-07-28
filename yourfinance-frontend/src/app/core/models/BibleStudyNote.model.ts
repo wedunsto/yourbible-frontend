@@ -1,11 +1,12 @@
 export interface BibleStudyNote {
+	username: string;
 	book: string;
 	chapter: number;
-	verses?: number[];
-	studyCategories: BibleStudyCategory[];
+	verses?: string;
+	study_categories: BibleStudyCategory[];
 	title: string;
 	notes: string;
-	studyDate: string;
+	created_at?: Date;
 }
 
 export type BibleStudyCategory = 

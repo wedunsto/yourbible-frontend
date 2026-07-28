@@ -15,6 +15,7 @@ import * as CreateBibleStudyActions from '../core/states/bible-study-notes/creat
 import { BibleStudyCategory, BibleStudyNote } from '../core/models/BibleStudyNote.model';
 
 import { FormInputComponent } from '../shared/components/form-input/form-input.component';
+import { selectUsername } from '../core/states/authentication/welcome/welcome.feature';
 
 @Component({
   selector: 'app-create-bible-study-note',
@@ -40,6 +41,18 @@ export class CreateBibleStudyNotePage implements OnInit {
 
   createBibleStudyNoteForm !: ReturnType<FormBuilder['group']>;
 
+  // Payload being sent to the back-end
+  payload: BibleStudyNote = {
+    username: '',
+    book: '',
+    chapter: 0,
+    verses: '',
+    study_categories: [],
+    title: '',
+    notes: '',
+    created_at: new Date()
+  };
+
   /**
    * 	- The book in the Bible
 	- The chapter in the book
@@ -51,11 +64,16 @@ export class CreateBibleStudyNotePage implements OnInit {
    */
 
   ngOnInit() {
+    // Get the username from the NGRX store to auto populate the payload
+    this.store.select(selectUsername).subscribe((username: string) => {
+    this.payload.username = username;
+  });
+
     // Create the form when the create Bible study page initializes
     this.createBibleStudyNoteForm = this.fb.group({
       book: ['', [Validators.required]],
       chapter: [0, [Validators.required]],
-      verses: [[], [Validators.required]],
+      verses: ['', [Validators.required]],
       categories: [null, [Validators.required]],
       title: ['', [Validators.required]],
       notes: ['', [Validators.required]],
@@ -72,11 +90,11 @@ export class CreateBibleStudyNotePage implements OnInit {
     return this.createBibleStudyNoteForm.get('chapter')?.value;
   }
 
-  verses(): number[] {
+  verses(): string {
     return this.createBibleStudyNoteForm.get('verses')?.value;
   }
 
-  categories(): BibleStudyCategory[] {
+  categories(): BibleStudyCategory {
     return this.createBibleStudyNoteForm.get('categories')?.value;
   }
 
@@ -98,18 +116,18 @@ export class CreateBibleStudyNotePage implements OnInit {
       return;
     }
 
-    const payload: BibleStudyNote = {
-      book: this.book(),
-      chapter: this.chapter(),
-      verses: this.verses(),
-      studyCategories: this.categories(),
-      title: this.title(),
-      notes: this.notes(),
-      studyDate: this.date()
+    this.payload.book = this.book();
+    this.payload.chapter = this.chapter();
+    this.payload.verses = this.verses();
+    this.payload.study_categories = [this.categories()];
+    this.payload.title = this.title();
+    this.payload.notes = this.notes();
+
+    if(this.date()) {
+      this.payload.created_at = new Date(this.date());
     }
 
     // Dispatch an NgRx action
-    // TODO: Fix this structure
-    this.store.dispatch(CreateBibleStudyActions.createBibleStudyNoteRequest({request: {payload}}))
+    this.store.dispatch(CreateBibleStudyActions.createBibleStudyNoteRequest({ request: { payload: this.payload } }))
   }
 }

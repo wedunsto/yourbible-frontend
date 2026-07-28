@@ -30,6 +30,8 @@ type inputType = 'text' | 'number' | 'category' | 'notes' | 'date'
   ]
 })
 export class FormInputComponent {
+  protected readonly Number = Number;
+
   title = input<string>('');
   placeholder = input<string>('');
   type = input<inputType>('text');

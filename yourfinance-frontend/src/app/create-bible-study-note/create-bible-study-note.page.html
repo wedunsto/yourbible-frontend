@@ -11,7 +11,7 @@
     </ion-toolbar>
   </ion-header>
   <div class="create-form">
-    <form [formGroup]="createBibleStudyNoteForm">
+    <form [formGroup]="createBibleStudyNoteForm" (ngSubmit)="submitBibleStudyNote()">
       <app-form-input
         title="Book"
         placeholder="e.g. Genesis"
@@ -26,16 +26,16 @@
         </app-form-input>
         <app-form-input
           title="Verses"
-          type="number"
+          type="text"
           placeholder="1; 1-5"
           [control]="createBibleStudyNoteForm.controls['verses']">
         </app-form-input>
       </div>
       <app-form-input
-        title="Category"
+        title="Categories"
         type="category"
-        placeholder="Select a category"
-        [control]="createBibleStudyNoteForm.controls['category']">
+        placeholder="Select categories"
+        [control]="createBibleStudyNoteForm.controls['categories']">
       </app-form-input>
       <app-form-input
         title="Title"
@@ -50,8 +50,9 @@
       <app-form-input
         title="Date"
         placeholder="mm/dd/yyyy"
-        [control]="createBibleStudyNoteForm.controls['notes']">
+        [control]="createBibleStudyNoteForm.controls['date']">
       </app-form-input>
+      <button type="submit">Submit</button>
     </form>
   </div>
 </ion-content>

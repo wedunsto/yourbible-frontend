@@ -12,7 +12,7 @@ export const accountAuthenticatedRequest = createAction(
 // Response: Success response from the back-end
 export const accountAuthenticatedSuccess = createAction(
   '[Login] Account Authenticated Success',
-  props<{ accessToken: string; accountStatus: string }>()
+  props<{ username: string; accessToken: string; accountStatus: string }>()
 );
 
 // Reponse: Failure response from the back-end
