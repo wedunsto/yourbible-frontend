@@ -143,8 +143,7 @@ export class RegisterPage implements OnInit {
   registerAccount = (): void => {
     this.formSubmitted = true;
 
-    if (!this.registerForm.valid) {
-    } else {
+    if (this.registerForm.valid) {
       const username = this.registerForm.get('username')?.value?.trim();
       const password = this.registerForm.get('password')?.value?.trim();
       this.store.dispatch(accountCreated({ username, password }));

@@ -1,0 +1,58 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>create-bible-study-note</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">create-bible-study-note</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div class="create-form">
+    <form [formGroup]="createBibleStudyNoteForm" (ngSubmit)="submitBibleStudyNote()">
+      <app-form-input
+        title="Book"
+        placeholder="e.g. Genesis"
+        [control]="createBibleStudyNoteForm.controls['book']">
+      </app-form-input>
+      <div class="chapter-and-verses">
+        <app-form-input
+          title="Chapter"
+          type="number"
+          placeholder="1"
+          [control]="createBibleStudyNoteForm.controls['chapter']">
+        </app-form-input>
+        <app-form-input
+          title="Verses"
+          type="text"
+          placeholder="1; 1-5"
+          [control]="createBibleStudyNoteForm.controls['verses']">
+        </app-form-input>
+      </div>
+      <app-form-input
+        title="Categories"
+        type="category"
+        placeholder="Select categories"
+        [control]="createBibleStudyNoteForm.controls['categories']">
+      </app-form-input>
+      <app-form-input
+        title="Title"
+        placeholder="Enter a title for your note"
+        [control]="createBibleStudyNoteForm.controls['title']">
+      </app-form-input>
+      <app-form-input
+        title="Notes"
+        placeholder="Enter your notes here..."
+        [control]="createBibleStudyNoteForm.controls['notes']">
+      </app-form-input>
+      <app-form-input
+        title="Date"
+        placeholder="mm/dd/yyyy"
+        [control]="createBibleStudyNoteForm.controls['date']">
+      </app-form-input>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</ion-content>

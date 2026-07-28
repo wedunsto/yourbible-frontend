@@ -10,9 +10,6 @@ import {
 } from '@angular/forms';
 import {
   IonContent,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
   IonText,
   IonButton,
   IonLabel,
@@ -24,6 +21,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { LoginState, selectLoginState } from '../core/states/authentication/login/login.feature';
 import { selectUsername } from '../core/states/authentication/welcome/welcome.feature';
+import { accountAuthenticatedRequest } from '../core/states/authentication/login/login.actions';
 
 @Component({
   selector: 'app-login',
@@ -32,9 +30,6 @@ import { selectUsername } from '../core/states/authentication/welcome/welcome.fe
   standalone: true,
   imports: [
     IonContent,
-    IonHeader,
-    IonTitle,
-    IonToolbar,
     IonText,
     IonButton,
     IonLabel,
@@ -63,8 +58,8 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     // Create the form when the component initializes
     this.loginForm = this.fb.group({
-      username: ['', [Validators.required]],
-      password: ['', [Validators.required]]
+      username: ['', [Validators.required, this.usernameValidation]],
+      password: ['', [Validators.required, this.passwordValidation]]
     });
 
     // Subscribe to the store's selectors
@@ -72,10 +67,30 @@ export class LoginPage implements OnInit {
       // Update the username value
       this.loginForm.get('username')?.setValue(username);
     });
+  }
 
-    this.store.select(selectLoginState).subscribe(({accessToken, accountStatus}: LoginState) => {
-        console.log(accessToken, accountStatus);
-    });
+  usernameValidation = (control: AbstractControl): ValidationErrors | null => {
+    const username: string = control.value ?? '';
+
+    const errors: ValidationErrors = {};
+
+    if (username.trim().length < 1) {
+      errors['empty_username'] = true;
+    }
+
+    return Object.keys(errors).length ? errors : null;
+  }
+
+  passwordValidation = (control: AbstractControl): ValidationErrors | null => {
+    const password: string = control.value ?? '';
+
+    const errors: ValidationErrors = {};
+
+    if (password.trim().length < 1) {
+      errors['empty_password'] = true;
+    }
+
+    return Object.keys(errors).length ? errors : null;
   }
 
   get usernameCtrl() {
@@ -86,20 +101,13 @@ export class LoginPage implements OnInit {
     return this.loginForm.get('password');
   }
 
-  /**
-   *  isPasswordModified(): boolean {
-   *   return !!(this.passwordCtrl?.dirty || this.passwordCtrl?.touched);
-   *  }
-   */
-
   loginAccount(): void {
     this.formSubmitted = true;
 
-    if(!this.loginForm.valid) {
-      // TODO: Build invalid styling and text to display
-    } else {
+    if(this.loginForm.valid) {
       const username = this.usernameCtrl?.value?.trim();
       const password = this.passwordCtrl?.value?.trim();
-    }
+      this.store.dispatch(accountAuthenticatedRequest({ username, password }));
+    } 
   }
 }

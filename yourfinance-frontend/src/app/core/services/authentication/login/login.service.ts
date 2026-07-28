@@ -10,7 +10,8 @@ export interface LoginPayload {
 
 export interface LoginResponse {
   accessToken: string,
-  accountStatus: string
+  accountStatus: string,
+  username: string
 }
 
 @Injectable({
@@ -29,9 +30,11 @@ export class LoginService {
    * @return account status: Status confirming if the user has access to the application
    */
   public loginToAccount(payload: LoginPayload): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(
+    const result = this.http.post<LoginResponse>(
       `${this.base}${this.loginEndpoint}`,
       payload
-    )
+    );
+
+    return result
   }
 }

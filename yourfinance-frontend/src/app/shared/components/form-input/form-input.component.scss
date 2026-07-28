@@ -1,0 +1,29 @@
+.form-input-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin: 0.5rem;
+
+    ion-item, ion-list {
+        --inner-border-width: 0;
+        --border-width: 0;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        --padding-start: 0;
+        --inner-padding-end: 0;
+        --min-height: auto;
+        --border-width: 0;
+        --inner-border-width: 0;
+    }
+
+    ion-input, ion-select {
+    --highlight-height: 0;
+    --border-radius: 12px;
+    --background: #f4f5f8;
+    --padding-start: 12px;
+    --padding-end: 12px;
+    width: 100%;
+    }
+}

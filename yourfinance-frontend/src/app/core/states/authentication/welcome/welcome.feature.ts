@@ -3,20 +3,20 @@ import { userExistsResult } from "./welcome.actions";
 
 export interface WelcomeState {
     username: string,
-    exists: boolean | null
+    destination: string | null
 }
 
 // Initial state provided to the NgRx store
 const initialState: WelcomeState = {
     username: '',
-    exists: null
+    destination: null
 }
 
 // The reducer uses this function to update the state of username and exists values
-const updateState = (state: WelcomeState, { username, exists }: WelcomeState) => ({
+const updateState = (state: WelcomeState, { username, destination }: WelcomeState) => ({
     ...state,
     username,
-    exists,
+    destination,
 });
 
 // Generates the Reducer and the Selectors
@@ -40,5 +40,5 @@ export const {
     reducer: welcomeReducer,
     selectWelcomeState,
     selectUsername,
-    selectExists,
+    selectDestination,
 } = WelcomeFeature;

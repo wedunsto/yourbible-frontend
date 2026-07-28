@@ -17,7 +17,7 @@ import {
   IonButton,
 } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
-import { selectExists } from '../core/states/authentication/welcome/welcome.feature';
+import { selectDestination } from '../core/states/authentication/welcome/welcome.feature';
 import { Store } from '@ngrx/store';
 import { userExistsChecked } from '../core/states/authentication/welcome/welcome.actions';
 import { AuthHeaderComponent } from '../components/auth-header/auth-header.component';
@@ -95,16 +95,12 @@ export class WelcomePage implements OnInit {
     this.store.dispatch(userExistsChecked({ username }));
 
     // Subscribe to the store's selector (auto-updated by reducer)
-    this.store.select(selectExists)
+    this.store.select(selectDestination)
     .pipe(
-      filter(exists => exists != null),
+      filter(destination => destination != null),
       take(1))
-    .subscribe ((exists: boolean) => {
-      if (exists) {
-        this.router.navigate(['/login']);
-      } else {
-        this.router.navigate(['/register']); 
-      }
+    .subscribe ((destination: string) => {
+      this.router.navigate([destination]);
     })
   }
 }
