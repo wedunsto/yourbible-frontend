@@ -1,4 +1,4 @@
-# yourbible-backend
+# yourbible-frontend
 # YourBible
 
 YourBible is a **progressive web application (PWA)** designed to help users take control of their personal walk with Christ through His word. Built with a modern tech stack—**Ionic Angular frontend** and **Node.JS backend**—it leverages **Anthropics's API** to intelligently recommend similar Bible verses and Bible study plans.
@@ -34,7 +34,7 @@ YourBible is a **progressive web application (PWA)** designed to help users take
 - PostgreSQL
 - Anthropic API Key
 
-### Frontend Setup
+### Backend Setup
 
 ```bash
 cd yourbible-frontend
