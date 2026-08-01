@@ -64,7 +64,7 @@ export class CreateBibleStudyNotePage implements OnInit {
    */
 
   ngOnInit() {
-    // Get the username from the NGRX store to auto populate the payload
+    // Get the username from the NGRX store to auto populate the
     this.store.select(selectUsername).subscribe((username: string) => {
     this.payload.username = username;
   });
