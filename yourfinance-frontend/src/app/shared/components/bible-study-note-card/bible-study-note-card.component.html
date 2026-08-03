@@ -1,0 +1,13 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>{{ note().title }}</ion-card-title>
+    <ion-card-subtitle>
+      {{ note().book }} {{ note().chapter }}<span *ngIf="note().verses">:{{ note().verses }}</span>
+    </ion-card-subtitle>
+  </ion-card-header>
+
+  <ion-card-content>
+    <p>{{ note().notes }}</p>
+    <p class="created-at" *ngIf="note().created_at">{{ note().created_at | date }}</p>
+  </ion-card-content>
+</ion-card>

@@ -12,8 +12,9 @@ import { LoginFeature } from './core/states/authentication/login/login.feature';
 import { WelcomeEffects } from './core/states/authentication/welcome/welcome.effects';
 import { RegisterEffects } from './core/states/authentication/register/register.effects';
 import { LoginEffects } from './core/states/authentication/login/login.effects';
-import { BibleStudyFeature } from './core/states/bible-study-notes/create/create.feature';
+import { BibleStudyFeature } from './core/states/bible-study-notes/bible-study-notes.feature';
 import { CreateBibleStudyNoteEffects } from './core/states/bible-study-notes/create/create.effect';
+import { ReadBibleStudyNotesEffects } from './core/states/bible-study-notes/read/read.effect';
 
 // Provide NgRx Store to the application
 export const appConfig: ApplicationConfig = {
@@ -29,6 +30,6 @@ export const appConfig: ApplicationConfig = {
     provideState(RegisterFeature),
     provideState(LoginFeature),
     provideState(BibleStudyFeature),
-    provideEffects([WelcomeEffects, RegisterEffects, LoginEffects, CreateBibleStudyNoteEffects]),   // optional effects
+    provideEffects([WelcomeEffects, RegisterEffects, LoginEffects, CreateBibleStudyNoteEffects, ReadBibleStudyNotesEffects]),   // optional effects
   ],
 };

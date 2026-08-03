@@ -20,9 +20,9 @@ export class ReadBibleStudyNotes {
   private base = environment.apiBaseUrl;
   private bibleStudyNotesEndpoint = environment.endpoints.notes;
 
-  public readBibleStudyNotes(username: ReadBibleStudyNotesRequest): Observable<ReadBibleStudyNotesResponse> {
+  public readBibleStudyNotes(request: ReadBibleStudyNotesRequest): Observable<ReadBibleStudyNotesResponse> {
     return this.http.get<ReadBibleStudyNotesResponse>(
-      `${this.base}${this.bibleStudyNotesEndpoint}?username=${username}`
+      `${this.base}${this.bibleStudyNotesEndpoint}?username=${request.username}`
     );
   }
 }

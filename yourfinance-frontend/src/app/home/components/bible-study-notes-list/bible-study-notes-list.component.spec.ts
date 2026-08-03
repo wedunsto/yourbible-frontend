@@ -9,8 +9,7 @@ describe('BibleStudyNotesListComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ BibleStudyNotesListComponent ],
-      imports: [IonicModule.forRoot()]
+      imports: [IonicModule.forRoot(), BibleStudyNotesListComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(BibleStudyNotesListComponent);
