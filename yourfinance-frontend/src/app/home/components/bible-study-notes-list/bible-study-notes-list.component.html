@@ -1,4 +1,6 @@
-<app-bible-study-note-card
-  *ngFor="let bibleStudyNote of bibleStudyNotes()"
-  [note]="bibleStudyNote"
-></app-bible-study-note-card>
+<div class="bible-study-note-cards">
+  <app-bible-study-note-card
+    *ngFor="let bibleStudyNote of bibleStudyNotes()"
+    [note]="bibleStudyNote">
+  </app-bible-study-note-card>
+</div>
