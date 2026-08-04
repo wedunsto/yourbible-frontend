@@ -4,10 +4,9 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { CreateBibleStudyNote } from "src/app/core/services/bible-study-notes/create-bible-study-note/create-bible-study-note.service";
 import { createBibleStudyNoteFailure, createBibleStudyNoteRequest, createBibleStudyNoteSuccess } from "./create.actions";
 import { catchError, map, of, switchMap, tap } from "rxjs";
-import { CreateBibleStudyNoteResponse } from "src/app/core/services/bible-study-notes/create-bible-study-note/create-bible-study-note.service";
+import { CreateBibleStudyNote } from "../../../services/bible-study-notes/create-bible-study-note/create-bible-study-note.service";
 
 @Injectable()
 export class CreateBibleStudyNoteEffects {

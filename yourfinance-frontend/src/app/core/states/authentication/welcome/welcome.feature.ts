@@ -7,8 +7,9 @@ export interface WelcomeState {
 }
 
 // Initial state provided to the NgRx store
+// Username is rehydrated from localStorage so it survives a page refresh
 const initialState: WelcomeState = {
-    username: '',
+    username: localStorage.getItem('username') ?? '',
     destination: null
 }
 

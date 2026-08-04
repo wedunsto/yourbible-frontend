@@ -1,8 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-import { BibleStudyNote } from 'src/app/core/models/BibleStudyNote.model';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
+import { environment } from '../../../../../environments/environment';
+import { BibleStudyNote } from '../../../models/BibleStudyNote.model';
 
 export interface CreateBibleStudyNoteRequest {
   payload: BibleStudyNote
@@ -18,14 +18,16 @@ export interface CreateBibleStudyNoteResponse {
 export class CreateBibleStudyNote {
   private http = inject(HttpClient);
   private base = environment.apiBaseUrl;
-  private bibleStudyNoteEndpoint = environment.endpoints.bibleStudyNotes;
+  private bibleStudyNotesEndpoint = environment.endpoints.notes;
 
   public createBibleStudyNote(payload: CreateBibleStudyNoteRequest): Observable<CreateBibleStudyNoteResponse> {
-    return this.http.post<CreateBibleStudyNoteResponse>(
-      `${this.base}${this.bibleStudyNoteEndpoint}`,
+    return this.http.post<BibleStudyNote>(
+      `${this.base}${this.bibleStudyNotesEndpoint}`,
       {
         "bibleStudyNote": payload.payload
       }
+    ).pipe(
+      map((response) => ({ response }))
     )
   }
 }

@@ -1,4 +1,5 @@
 export interface BibleStudyNote {
+	id: string;
 	username: string;
 	book: string;
 	chapter: number;

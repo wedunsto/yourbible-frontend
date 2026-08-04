@@ -28,9 +28,5 @@ import {
   ]
 })
 export class HomeMenuComponent  implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {}
-
+  ngOnInit() { }
 }
