@@ -1,8 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-import { BibleStudyNote } from 'src/app/core/models/BibleStudyNote.model';
 import { map, Observable } from 'rxjs';
+import { environment } from '../../../../../environments/environment';
+import { BibleStudyNote } from '../../../models/BibleStudyNote.model';
 
 export interface CreateBibleStudyNoteRequest {
   payload: BibleStudyNote

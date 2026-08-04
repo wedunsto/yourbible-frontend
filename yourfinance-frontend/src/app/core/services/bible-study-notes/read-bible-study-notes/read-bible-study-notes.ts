@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { BibleStudyNote } from 'src/app/core/models/BibleStudyNote.model';
-import { environment } from 'src/environments/environment';
+import { BibleStudyNote } from '../../../models/BibleStudyNote.model';
+import { environment } from '../../../../../environments/environment';
 
 export interface ReadBibleStudyNotesRequest {
   username: string

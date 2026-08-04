@@ -1,8 +1,7 @@
 import { Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { BibleStudyNote } from 'src/app/core/models/BibleStudyNote.model';
-import { BibleStudyNoteCardComponent } from 'src/app/home/components/bible-study-note-card/bible-study-note-card.component';
+import { BibleStudyNoteCardComponent } from '../bible-study-note-card/bible-study-note-card.component';
+import { BibleStudyNote } from '../../../core/models/BibleStudyNote.model';
 
 /**
  * Objective: Display the list of Bible study notes

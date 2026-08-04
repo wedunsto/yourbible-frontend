@@ -4,8 +4,8 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { catchError, map, of, switchMap } from "rxjs";
-import { ReadBibleStudyNotes } from "src/app/core/services/bible-study-notes/read-bible-study-notes/read-bible-study-notes";
 import { readBibleStudyNotesFailure, readBibleStudyNotesRequest, readBibleStudyNotesSuccess } from "./read.actions";
+import { ReadBibleStudyNotes } from "../../../services/bible-study-notes/read-bible-study-notes/read-bible-study-notes";
 
 @Injectable()
 export class ReadBibleStudyNotesEffects {

@@ -3,9 +3,9 @@
 // Selectors: Return the required value from the NgRx store
 
 import { createFeature, createReducer, on } from "@ngrx/store";
-import { BibleStudyNote } from "src/app/core/models/BibleStudyNote.model";
 import { createBibleStudyNoteSuccess } from "./create/create.actions";
 import { readBibleStudyNotesSuccess } from "./read/read.actions";
+import { BibleStudyNote } from "../../models/BibleStudyNote.model";
 
 export interface BibleStudyNotesState {
     bibleStudyNotes: BibleStudyNote[]

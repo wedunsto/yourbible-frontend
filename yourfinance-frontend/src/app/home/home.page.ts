@@ -12,10 +12,10 @@ import {
 import { HomeMenuComponent } from './components/home-menu/home-menu.component';
 import { Store } from '@ngrx/store';
 import { BibleStudyNote } from '../core/models/BibleStudyNote.model';
-import * as ReadBibleStudyNotesActions from 'src/app/core/states/bible-study-notes/read/read.actions';
 import { selectUsername } from '../core/states/authentication/welcome/welcome.feature';
 import { selectBibleStudyNotes } from '../core/states/bible-study-notes/bible-study-notes.feature';
 import { BibleStudyNotesListComponent } from './components/bible-study-notes-list/bible-study-notes-list.component';
+import { readBibleStudyNotesRequest } from '../core/states/bible-study-notes/read/read.actions';
 
 @Component({
   selector: 'app-home',
@@ -44,7 +44,7 @@ username: string = '';
   ) { }
 
     fetchBibleStudyNotes = () => {
-    this.store.dispatch(ReadBibleStudyNotesActions.readBibleStudyNotesRequest({ request: {username: this.username} }))
+    this.store.dispatch(readBibleStudyNotesRequest({ request: {username: this.username} }))
   }
 
   ngOnInit() {

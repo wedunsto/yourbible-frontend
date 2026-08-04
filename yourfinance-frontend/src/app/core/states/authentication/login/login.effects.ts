@@ -4,8 +4,8 @@ import { catchError, map, of, switchMap, tap } from "rxjs";
 import { accountAuthenticatedRequest, accountAuthenticatedSuccess, accountAuthenticatedFailure } from "./login.actions";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Injectable } from "@angular/core";
-import { LoginResponse, LoginService } from "src/app/core/services/authentication/login/login.service";
 import { Router } from "@angular/router";
+import { LoginResponse, LoginService } from "../../../services/authentication/login/login.service";
 
 @Injectable()
 export class LoginEffects {

@@ -1,6 +1,6 @@
 // app/core/states/bible-study-notes/create.actions.ts
 import { createAction, props } from "@ngrx/store";
-import { CreateBibleStudyNoteRequest, CreateBibleStudyNoteResponse } from "src/app/core/services/bible-study-notes/create-bible-study-note/create-bible-study-note.service";
+import { CreateBibleStudyNoteRequest, CreateBibleStudyNoteResponse } from "../../../services/bible-study-notes/create-bible-study-note/create-bible-study-note.service";
 
 // Request: create Bible study note
 export const createBibleStudyNoteRequest = createAction(

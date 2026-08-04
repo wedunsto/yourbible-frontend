@@ -8,8 +8,8 @@ import {
   IonCardSubtitle,
   IonCardContent
 } from '@ionic/angular/standalone';
+import { BibleStudyNote } from '../../../core/models/BibleStudyNote.model';
 
-import { BibleStudyNote } from 'src/app/core/models/BibleStudyNote.model';
 
 @Component({
   selector: 'app-bible-study-note-card',

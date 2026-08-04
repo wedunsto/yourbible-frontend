@@ -1,9 +1,10 @@
 .create-form {
-  width: 100%;
+  display: flex;
+  margin: 1rem;
 }
 
-.create-form form {
-  width: 100%;
+.title {
+  font-size: x-large;
 }
 
 .chapter-and-verses {
