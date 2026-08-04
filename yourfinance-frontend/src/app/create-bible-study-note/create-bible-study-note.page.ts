@@ -17,6 +17,8 @@ import { BibleStudyCategory, BibleStudyNote } from '../core/models/BibleStudyNot
 import { FormInputComponent } from '../shared/components/form-input/form-input.component';
 import { selectUsername } from '../core/states/authentication/welcome/welcome.feature';
 
+import { v4 as uuidv4 } from 'uuid';
+
 @Component({
   selector: 'app-create-bible-study-note',
   templateUrl: './create-bible-study-note.page.html',
@@ -41,8 +43,11 @@ export class CreateBibleStudyNotePage implements OnInit {
 
   createBibleStudyNoteForm !: ReturnType<FormBuilder['group']>;
 
+  newId = uuidv4();
+
   // Payload being sent to the back-end
   payload: BibleStudyNote = {
+    id: this.newId,
     username: '',
     book: '',
     chapter: 0,
