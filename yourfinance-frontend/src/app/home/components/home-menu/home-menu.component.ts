@@ -7,7 +7,8 @@ import {
   IonContent,
   IonItemGroup,
   IonItem,
-  IonLabel
+  IonLabel,
+  IonToolbar
  } from '@ionic/angular/standalone';
 
  import { RouterModule } from '@angular/router';
@@ -24,6 +25,7 @@ import {
     IonItemGroup,
     IonItem,
     IonLabel,
+    IonToolbar,
     RouterModule
   ]
 })
