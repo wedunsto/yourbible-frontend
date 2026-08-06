@@ -9,6 +9,7 @@ import {
   IonCardContent
 } from '@ionic/angular/standalone';
 import { BibleStudyNote } from '../../../core/models/BibleStudyNote.model';
+import { DeleteBibleStudyNoteComponent } from '../delete-bible-study-note/delete-bible-study-note.component';
 
 
 @Component({
@@ -21,7 +22,8 @@ import { BibleStudyNote } from '../../../core/models/BibleStudyNote.model';
     IonCardHeader,
     IonCardTitle,
     IonCardSubtitle,
-    IonCardContent
+    IonCardContent,
+    DeleteBibleStudyNoteComponent
   ]
 })
 export class BibleStudyNoteCardComponent {

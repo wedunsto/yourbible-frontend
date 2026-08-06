@@ -5,6 +5,7 @@
 import { createFeature, createReducer, on } from "@ngrx/store";
 import { createBibleStudyNoteSuccess } from "./create/create.actions";
 import { readBibleStudyNotesSuccess } from "./read/read.actions";
+import { deleteBibleStudyNoteSuccess } from "./delete/delete.actions";
 import { BibleStudyNote } from "../../models/BibleStudyNote.model";
 
 export interface BibleStudyNotesState {
@@ -33,6 +34,10 @@ export const BibleStudyFeature = createFeature({
         on(readBibleStudyNotesSuccess, (state, { response }) => ({
             ...state,
             bibleStudyNotes: response.bibleStudyNotes,
+        })),
+        on(deleteBibleStudyNoteSuccess, (state, { response }) => ({
+            ...state,
+            bibleStudyNotes: state.bibleStudyNotes.filter((note) => note.id !== response.id),
         }))
     ),
 });
