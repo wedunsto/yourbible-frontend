@@ -11,5 +11,8 @@
     <p class="created-at" *ngIf="note().created_at">{{ note().created_at | date }}</p>
   </ion-card-content>
 
-  <app-delete-bible-study-note [id]="note().id"></app-delete-bible-study-note>
+  <div class="card-actions">
+    <app-update-bible-study-note [id]="note().id"></app-update-bible-study-note>
+    <app-delete-bible-study-note [id]="note().id"></app-delete-bible-study-note>
+  </div>
 </ion-card>
