@@ -1,6 +1,6 @@
 import { ApplicationConfig } from '@angular/core';
 import { provideIonicAngular } from '@ionic/angular/standalone';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideStore, provideState } from '@ngrx/store';
@@ -16,12 +16,13 @@ import { BibleStudyFeature } from './core/states/bible-study-notes/bible-study-n
 import { CreateBibleStudyNoteEffects } from './core/states/bible-study-notes/create/create.effect';
 import { ReadBibleStudyNotesEffects } from './core/states/bible-study-notes/read/read.effect';
 import { DeleteBibleStudyNoteEffects } from './core/states/bible-study-notes/delete/delete.effect';
+import { UpdateBibleStudyNoteEffects } from './core/states/bible-study-notes/update/update.effect';
 
 // Provide NgRx Store to the application
 export const appConfig: ApplicationConfig = {
   providers: [
     provideIonicAngular(),
-    provideRouter(routes),
+    provideRouter(routes, withComponentInputBinding()),
     provideHttpClient(
       //withInterceptors([authInterceptor]) // attach JWT automatically
     ),
@@ -31,6 +32,6 @@ export const appConfig: ApplicationConfig = {
     provideState(RegisterFeature),
     provideState(LoginFeature),
     provideState(BibleStudyFeature),
-    provideEffects([WelcomeEffects, RegisterEffects, LoginEffects, CreateBibleStudyNoteEffects, ReadBibleStudyNotesEffects, DeleteBibleStudyNoteEffects]),   // optional effects
+    provideEffects([WelcomeEffects, RegisterEffects, LoginEffects, CreateBibleStudyNoteEffects, ReadBibleStudyNotesEffects, DeleteBibleStudyNoteEffects, UpdateBibleStudyNoteEffects]),   // optional effects
   ],
 };

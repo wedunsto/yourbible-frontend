@@ -12,6 +12,8 @@ import {
   IonSelectOption
 } from '@ionic/angular/standalone';
 
+import { BibleStudyCategory } from '../../../core/models/BibleStudyNote.model';
+
 type inputType = 'text' | 'number' | 'category' | 'notes' | 'date'
 
 @Component({
@@ -31,6 +33,18 @@ type inputType = 'text' | 'number' | 'category' | 'notes' | 'date'
 })
 export class FormInputComponent {
   protected readonly Number = Number;
+
+  bibleStudyCategories: BibleStudyCategory[] = [
+    "Hope",
+    "God's Character",
+    "Fear",
+    "Money",
+    "Sin",
+    "Manhood",
+    "Calling",
+    "Leadership",
+    "Fatherhood",
+  ];
 
   title = input<string>('');
   placeholder = input<string>('');

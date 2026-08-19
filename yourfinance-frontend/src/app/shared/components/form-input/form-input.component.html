@@ -22,10 +22,13 @@
       <ion-item>
         <ion-select
           [placeholder]="placeholder()"
+          [multiple]="true"
           [value]="control()?.value"
           (ionChange)="control()?.setValue($event.detail.value)"
           (ionBlur)="control()?.markAsTouched()">
-          <ion-select-option value="Hope">Hope</ion-select-option>
+          @for (category of bibleStudyCategories; track category) {
+            <ion-select-option [value]="category">{{ category }}</ion-select-option>
+          }
         </ion-select>
       </ion-item>
     </ion-list>

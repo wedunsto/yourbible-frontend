@@ -43,20 +43,7 @@ export class CreateBibleStudyNotePage implements OnInit {
 
   createBibleStudyNoteForm !: ReturnType<FormBuilder['group']>;
 
-  newId = uuidv4();
-
-  // Payload being sent to the back-end
-  payload: BibleStudyNote = {
-    id: this.newId,
-    username: '',
-    book: '',
-    chapter: 0,
-    verses: '',
-    study_categories: [],
-    title: '',
-    notes: '',
-    created_at: new Date()
-  };
+  username = '';
 
   /**
    * 	- The book in the Bible
@@ -71,8 +58,8 @@ export class CreateBibleStudyNotePage implements OnInit {
   ngOnInit() {
     // Get the username from the NGRX store to auto populate the
     this.store.select(selectUsername).subscribe((username: string) => {
-    this.payload.username = username;
-  });
+      this.username = username;
+    });
 
     // Create the form when the create Bible study page initializes
     this.createBibleStudyNoteForm = this.fb.group({
@@ -99,8 +86,8 @@ export class CreateBibleStudyNotePage implements OnInit {
     return this.createBibleStudyNoteForm.get('verses')?.value;
   }
 
-  categories(): BibleStudyCategory {
-    return this.createBibleStudyNoteForm.get('categories')?.value;
+  categories(): BibleStudyCategory[] {
+    return this.createBibleStudyNoteForm.get('categories')?.value ?? [];
   }
 
   title(): string {
@@ -121,18 +108,19 @@ export class CreateBibleStudyNotePage implements OnInit {
       return;
     }
 
-    this.payload.book = this.book();
-    this.payload.chapter = this.chapter();
-    this.payload.verses = this.verses();
-    this.payload.study_categories = [this.categories()];
-    this.payload.title = this.title();
-    this.payload.notes = this.notes();
-
-    if(this.date()) {
-      this.payload.created_at = new Date(this.date());
-    }
+    const payload: BibleStudyNote = {
+      id: uuidv4(),
+      username: this.username,
+      book: this.book(),
+      chapter: this.chapter(),
+      verses: this.verses(),
+      study_categories: this.categories(),
+      title: this.title(),
+      notes: this.notes(),
+      created_at: this.date() ? new Date(this.date()) : new Date()
+    };
 
     // Dispatch an NgRx action
-    this.store.dispatch(CreateBibleStudyActions.createBibleStudyNoteRequest({ request: { payload: this.payload } }))
+    this.store.dispatch(CreateBibleStudyActions.createBibleStudyNoteRequest({ request: { payload } }))
   }
 }

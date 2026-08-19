@@ -3,3 +3,9 @@ ion-card {
     flex-direction: column;
     padding: 0.5rem;
 }
+
+.card-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
