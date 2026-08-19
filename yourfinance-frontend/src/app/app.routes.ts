@@ -29,6 +29,10 @@ export const routes: Routes = [
     path: 'update-bible-study-note/:id',
     loadComponent: () => import('./update-bible-study-note/update-bible-study-note.page').then( m => m.UpdateBibleStudyNotePage)
   },
+  {
+    path: 'ai-bible-verse-recommendation',
+    loadComponent: () => import('./ai-bible-verse-recommendation/ai-bible-verse-recommendation.page').then( m => m.AiBibleVerseRecommendationPage)
+  },
 
 
 ];

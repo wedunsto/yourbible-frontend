@@ -1,0 +1,20 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>AI Bible Verse Recommendation</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title class="title">AI Bible Verse Recommendation</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div class="recommendation-content">
+    <ion-button (click)="getBibleVerseRecommendation()">Get Bible Verse Recommendation</ion-button>
+
+    <div class="recommendation-result">
+      <app-bible-study-note-card *ngIf="recommendedNote" [note]="recommendedNote"></app-bible-study-note-card>
+    </div>
+  </div>
+</ion-content>
