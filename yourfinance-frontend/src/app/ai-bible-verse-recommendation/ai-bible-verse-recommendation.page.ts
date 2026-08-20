@@ -50,7 +50,7 @@ export class AiBibleVerseRecommendationPage implements OnInit {
     this.bibleVerseRecommendationService.bibleVerseRecommendation(this.username, this.categories).subscribe((response) => {
       const bibleStudyNote: BibleStudyNote = {
           id: uuidv4(),
-          username,
+          username: username,
           book: response.bibleVerse.book,
           chapter: response.bibleVerse.chapter,
           verses: String(response.bibleVerse.verse),
