@@ -6,9 +6,8 @@ import { Store } from '@ngrx/store';
 import { BibleStudyCategory, BibleStudyNote } from '../core/models/BibleStudyNote.model';
 import { selectUsername } from '../core/states/authentication/welcome/welcome.feature';
 import { BibleVerseRecommendation } from '../core/services/bible-verse-recommendations/bible-verse-recommendations.service';
-import { BibleStudyNoteCardComponent } from '../home/components/bible-study-note-card/bible-study-note-card.component';
+import { AiBibleStudyNoteCardComponent } from './components/ai-bible-study-note-card/ai-bible-study-note-card.component';
 import { selectBibleStudyNotes } from '../core/states/bible-study-notes/bible-study-notes.feature';
-import { createBibleStudyNoteRequest } from '../core/states/bible-study-notes/create/create.actions';
 import { v4 as uuidv4 } from 'uuid';
 
 @Component({
@@ -23,7 +22,7 @@ import { v4 as uuidv4 } from 'uuid';
     IonToolbar,
     IonButton,
     CommonModule,
-    BibleStudyNoteCardComponent
+    AiBibleStudyNoteCardComponent
   ]
 })
 export class AiBibleVerseRecommendationPage implements OnInit {
@@ -54,7 +53,7 @@ export class AiBibleVerseRecommendationPage implements OnInit {
           username,
           book: response.bibleVerse.book,
           chapter: response.bibleVerse.chapter,
-          verses: response.bibleVerse.verse,
+          verses: String(response.bibleVerse.verse),
           study_categories: [response.category],
           title: `Recommendation on ${response.category}`,
           notes: response.bibleVerseText,
@@ -63,5 +62,13 @@ export class AiBibleVerseRecommendationPage implements OnInit {
       
       this.recommendedNote = bibleStudyNote;
     });
+  }
+
+  onNoteDeleted(): void {
+    this.recommendedNote = null;
+  }
+
+  recommendationExists = ():boolean => {
+    return this.recommendedNote !== null;
   }
 }

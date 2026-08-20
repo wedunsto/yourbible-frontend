@@ -11,10 +11,12 @@
     </ion-toolbar>
   </ion-header>
   <div class="recommendation-content">
-    <ion-button (click)="getBibleVerseRecommendation()">Get Bible Verse Recommendation</ion-button>
+    <ion-button
+      (click)="getBibleVerseRecommendation()"
+      [disabled]="recommendationExists()">Get Bible Verse Recommendation</ion-button>
 
     <div class="recommendation-result">
-      <app-bible-study-note-card *ngIf="recommendedNote" [note]="recommendedNote"></app-bible-study-note-card>
+      <app-ai-bible-study-note-card *ngIf="recommendedNote" [note]="recommendedNote" (deleted)="onNoteDeleted()"></app-ai-bible-study-note-card>
     </div>
   </div>
 </ion-content>
