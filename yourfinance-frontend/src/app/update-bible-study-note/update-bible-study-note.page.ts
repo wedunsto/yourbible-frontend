@@ -31,7 +31,6 @@ import { selectBibleStudyNotes } from '../core/states/bible-study-notes/bible-st
   ]
 })
 export class UpdateBibleStudyNotePage implements OnInit {
-  // Bound automatically from the :id route parameter
   id = input<string>('');
 
   // Use dependency injection to get an instance of FormBuilder
@@ -66,8 +65,8 @@ export class UpdateBibleStudyNotePage implements OnInit {
       date: [null, [Validators.required]]
     });
 
-    // Get the Bible study notes from the NgRx store, and find the note with the matching id
-    this.store.select(selectBibleStudyNotes).subscribe((bibleStudyNotes: Array<BibleStudyNote>) => {
+    // Find the Bible study note being updated from the store using the route id
+    this.store.select(selectBibleStudyNotes).subscribe((bibleStudyNotes: BibleStudyNote[]) => {
       const note = bibleStudyNotes.find((bibleStudyNote) => bibleStudyNote.id === this.id());
 
       if (!note) {
@@ -143,6 +142,6 @@ export class UpdateBibleStudyNotePage implements OnInit {
     }
 
     // Dispatch an NgRx action
-    this.store.dispatch(UpdateBibleStudyActions.updateBibleStudyNoteRequest({ request: { id: this.id(), updates: this.payload } }));
+    this.store.dispatch(UpdateBibleStudyActions.updateBibleStudyNoteRequest({ request: { id: this.payload.id, updates: this.payload } }));
   }
 }
