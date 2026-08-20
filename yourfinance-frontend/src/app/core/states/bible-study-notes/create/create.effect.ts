@@ -38,11 +38,17 @@ export class CreateBibleStudyNoteEffects {
     )
 
     // Navigate to home if the response is successful
+    // Skip navigation when the note was created from the AI Bible Verse Recommendation page,
+    // which shows the created note as a card in place rather than redirecting to home
     navigateOnCreateSuccess$ = createEffect(
         () =>
             this.actions$.pipe(
                 ofType(createBibleStudyNoteSuccess),
-                tap(() => this.router.navigate(['/home']))
+                tap(() => {
+                    if (!this.router.url.startsWith('/ai-bible-verse-recommendation')) {
+                        this.router.navigate(['/home']);
+                    }
+                })
             ),
             { dispatch: false }
     )
