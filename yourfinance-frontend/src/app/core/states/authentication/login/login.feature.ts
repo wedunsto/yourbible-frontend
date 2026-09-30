@@ -6,24 +6,24 @@ import { accountAuthenticatedSuccess, accountAuthenticatedFailure } from "./logi
 
 export interface LoginState {
     accessToken: string,
-    accountStatus: string,
     username: string,
+    userId: string,
     error: unknown | null,
 }
 
 // Initial state provided to the NgRx store
 const initialState: LoginState = {
     accessToken: '',
-    accountStatus: '',
     username: '',
+    userId: '',
     error: null,
 }
 
 // The reducer uses this function to update the state of username and account status values
-const updateState = (state: LoginState, { accessToken, accountStatus, username }: LoginState) => ({
+const updateState = (state: LoginState, { accessToken, username, userId }: LoginState) => ({
     ...state,
     accessToken,
-    accountStatus,
+    userId,
     username
 });
 
@@ -32,11 +32,11 @@ export const LoginFeature = createFeature({
     name: 'login',
     reducer: createReducer(
         initialState,
-        on(accountAuthenticatedSuccess, (state, { accessToken, accountStatus, username }) => ({
+        on(accountAuthenticatedSuccess, (state, { accessToken, username, userId }) => ({
             ...state,
             accessToken,
-            accountStatus,
             username,
+            userId,
             error: null
         })),
 
@@ -63,6 +63,6 @@ export const {
     reducer: loginReducer,
     selectLoginState,
     selectAccessToken,
-    selectAccountStatus,
+    selectUserId,
     selectUsername,
 } = LoginFeature;

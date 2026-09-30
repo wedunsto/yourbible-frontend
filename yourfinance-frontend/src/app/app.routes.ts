@@ -33,6 +33,10 @@ export const routes: Routes = [
     path: 'ai-bible-verse-recommendation',
     loadComponent: () => import('./ai-bible-verse-recommendation/ai-bible-verse-recommendation.page').then( m => m.AiBibleVerseRecommendationPage)
   },
+  {
+    path: 'onboarding',
+    loadComponent: () => import('./onboarding/onboarding.page').then( m => m.OnboardingPage)
+  },
 
 
 ];

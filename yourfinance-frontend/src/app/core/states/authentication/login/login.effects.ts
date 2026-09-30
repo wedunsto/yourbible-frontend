@@ -23,7 +23,7 @@ export class LoginEffects {
                 this.loginService.loginToAccount({ username, password }).pipe(
                     // Map the back-end response to another action
                     // Sending the response to authenticating an existing account to the front-end
-                    map(({ accessToken, accountStatus, username }: LoginResponse) => accountAuthenticatedSuccess({ accessToken, accountStatus, username })),
+                    map(({ accessToken, onboarded, username, userId }: LoginResponse) => accountAuthenticatedSuccess({ accessToken, onboarded, username, userId })),
                     // TODO: Handle errors
                     catchError((error) => {
                         console.error('Error authenticating new account', error);
@@ -41,7 +41,7 @@ export class LoginEffects {
     () =>
       this.actions$.pipe(
         ofType(accountAuthenticatedSuccess),
-        tap(() => this.router.navigate(['/home']))
+        tap(({ onboarded }) => this.router.navigate([onboarded ? '/home' : '/onboarding']))
       ),
     { dispatch: false }
   );
