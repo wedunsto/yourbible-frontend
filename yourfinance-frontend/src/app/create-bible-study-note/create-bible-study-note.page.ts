@@ -16,8 +16,10 @@ import { BibleStudyCategory, BibleStudyNote } from '../core/models/BibleStudyNot
 
 import { FormInputComponent } from '../shared/components/form-input/form-input.component';
 import { selectUsername } from '../core/states/authentication/welcome/welcome.feature';
+import { selectUserId } from '../core/states/authentication/login/login.feature';
 
 import { v4 as uuidv4 } from 'uuid';
+import { toLocalDateOnly, toStudyDate } from '../core/utils/study-date';
 
 @Component({
   selector: 'app-create-bible-study-note',
@@ -45,6 +47,8 @@ export class CreateBibleStudyNotePage implements OnInit {
 
   username = '';
 
+  userId = '';
+
   /**
    * 	- The book in the Bible
 	- The chapter in the book
@@ -61,6 +65,11 @@ export class CreateBibleStudyNotePage implements OnInit {
       this.username = username;
     });
 
+    // Get the user Id from the NGRX store
+    this.store.select(selectUserId).subscribe((userId: string) => {
+      this.userId = userId;
+    });
+
     // Create the form when the create Bible study page initializes
     this.createBibleStudyNoteForm = this.fb.group({
       book: ['', [Validators.required]],
@@ -69,7 +78,7 @@ export class CreateBibleStudyNotePage implements OnInit {
       categories: [null, [Validators.required]],
       title: ['', [Validators.required]],
       notes: ['', [Validators.required]],
-      date: [null, [Validators.required]]
+      date: [toLocalDateOnly(), [Validators.required]]
     })
   }
 
@@ -110,14 +119,14 @@ export class CreateBibleStudyNotePage implements OnInit {
 
     const payload: BibleStudyNote = {
       id: uuidv4(),
-      username: this.username,
+      user_id: this.userId,
       book: this.book(),
       chapter: this.chapter(),
       verses: this.verses(),
       study_categories: this.categories(),
       title: this.title(),
       notes: this.notes(),
-      created_at: this.date() ? new Date(this.date()) : new Date()
+      study_date: toStudyDate(this.date())
     };
 
     // Dispatch an NgRx action

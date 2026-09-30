@@ -8,7 +8,9 @@ import { selectUsername } from '../core/states/authentication/welcome/welcome.fe
 import { BibleVerseRecommendation } from '../core/services/bible-verse-recommendations/bible-verse-recommendations.service';
 import { AiBibleStudyNoteCardComponent } from './components/ai-bible-study-note-card/ai-bible-study-note-card.component';
 import { selectBibleStudyNotes } from '../core/states/bible-study-notes/bible-study-notes.feature';
+import { selectUserId } from '../core/states/authentication/login/login.feature';
 import { v4 as uuidv4 } from 'uuid';
+import { toLocalDateOnly } from '../core/utils/study-date';
 
 @Component({
   selector: 'app-ai-bible-verse-recommendation',
@@ -32,6 +34,7 @@ export class AiBibleVerseRecommendationPage implements OnInit {
   ) { }
 
   username = '';
+  userId = '';
   categories: BibleStudyCategory[] = [];
   recommendedNote: BibleStudyNote | null = null;
 
@@ -43,6 +46,9 @@ export class AiBibleVerseRecommendationPage implements OnInit {
     this.store.select(selectBibleStudyNotes).subscribe((bibleStudyNotes: BibleStudyNote[]) => {
       this.categories = bibleStudyNotes.flatMap((note) => note.study_categories)
     });
+    this.store.select(selectUserId).subscribe((userId: string) => {
+      this.userId = userId;
+    })
   }
 
   getBibleVerseRecommendation(): void {
@@ -50,14 +56,14 @@ export class AiBibleVerseRecommendationPage implements OnInit {
     this.bibleVerseRecommendationService.bibleVerseRecommendation(this.username, this.categories).subscribe((response) => {
       const bibleStudyNote: BibleStudyNote = {
           id: uuidv4(),
-          username: username,
+          user_id: this.userId,
           book: response.bibleVerse.book,
           chapter: response.bibleVerse.chapter,
           verses: String(response.bibleVerse.verse),
           study_categories: [response.category],
           title: `Recommendation on ${response.category}`,
           notes: response.bibleVerseText,
-          created_at: new Date()
+          study_date: toLocalDateOnly()
         };
       
       this.recommendedNote = bibleStudyNote;

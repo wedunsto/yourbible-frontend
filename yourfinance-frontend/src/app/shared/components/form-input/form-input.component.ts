@@ -3,6 +3,7 @@ import { AbstractControl } from '@angular/forms';
 
 import {
   IonInput,
+  IonTextarea,
   IonDatetime,
   IonDatetimeButton,
   IonModal,
@@ -16,12 +17,16 @@ import { BibleStudyCategory } from '../../../core/models/BibleStudyNote.model';
 
 type inputType = 'text' | 'number' | 'category' | 'notes' | 'date'
 
+// Incremented per instance so each date picker gets a unique id to link its button to
+let nextDatetimeId = 0;
+
 @Component({
   selector: 'app-form-input',
   templateUrl: './form-input.component.html',
   styleUrls: ['./form-input.component.scss'],
   imports: [
     IonInput,
+  IonTextarea,
     IonDatetime,
     IonDatetimeButton,
     IonModal,
@@ -50,4 +55,17 @@ export class FormInputComponent {
   placeholder = input<string>('');
   type = input<inputType>('text');
   control = input<AbstractControl | null>(null);
+
+  // Links <ion-datetime-button> to its <ion-datetime>; must be unique on the page
+  readonly datetimeId = `form-input-datetime-${nextDatetimeId++}`;
+
+  /**
+   * Whether the bound control should show its validation error: it is invalid
+   * and the user has interacted with it (or a submit called markAllAsTouched).
+   * @param control The form control bound to this input, if any.
+   * @returns True when an error message should be displayed.
+   */
+  showError(control: AbstractControl | null): boolean {
+    return !!control && control.invalid && control.touched;
+  }
 }

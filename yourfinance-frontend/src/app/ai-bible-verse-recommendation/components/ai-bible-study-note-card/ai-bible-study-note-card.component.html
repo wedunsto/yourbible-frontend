@@ -8,7 +8,7 @@
 
   <ion-card-content>
     <p>{{ note().notes }}</p>
-    <p class="created-at" *ngIf="note().created_at">{{ note().created_at | date }}</p>
+    <p class="created-at" *ngIf="note().study_date">{{ note().study_date | date:'mediumDate':'UTC' }}</p>
   </ion-card-content>
 
   <div class="card-actions">

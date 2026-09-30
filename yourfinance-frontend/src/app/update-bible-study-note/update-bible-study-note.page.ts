@@ -14,6 +14,7 @@ import { BibleStudyCategory, BibleStudyNote } from '../core/models/BibleStudyNot
 
 import { FormInputComponent } from '../shared/components/form-input/form-input.component';
 import { selectBibleStudyNotes } from '../core/states/bible-study-notes/bible-study-notes.feature';
+import { toLocalDateOnly, toStudyDate } from '../core/utils/study-date';
 
 @Component({
   selector: 'app-update-bible-study-note',
@@ -43,14 +44,14 @@ export class UpdateBibleStudyNotePage implements OnInit {
 
   payload: BibleStudyNote = {
     id: '',
-    username: '',
+    user_id: '',
     book: '',
     chapter: 0,
     verses: '',
     study_categories: [],
     title: '',
     notes: '',
-    created_at: new Date()
+    study_date: toLocalDateOnly()
   };
 
   ngOnInit() {
@@ -62,7 +63,7 @@ export class UpdateBibleStudyNotePage implements OnInit {
       categories: [null, [Validators.required]],
       title: ['', [Validators.required]],
       notes: ['', [Validators.required]],
-      date: [null, [Validators.required]]
+      date: [toLocalDateOnly(), [Validators.required]]
     });
 
     // Find the Bible study note being updated from the store using the route id
@@ -74,23 +75,24 @@ export class UpdateBibleStudyNotePage implements OnInit {
       }
 
       this.payload.id = note.id;
+      this.payload.user_id = note.user_id;
       this.payload.book = note.book;
       this.payload.chapter = note.chapter;
       this.payload.verses = note.verses;
       this.payload.study_categories = note.study_categories;
       this.payload.title = note.title;
       this.payload.notes = note.notes;
-      this.payload.created_at = note.created_at;
+      this.payload.study_date = toStudyDate(note.study_date);
 
       // Pre-populate the form with the existing Bible study note
       this.updateBibleStudyNoteForm.patchValue({
         book: note.book,
         chapter: note.chapter,
         verses: note.verses,
-        categories: note.study_categories[0] ?? null,
+        categories: note.study_categories.length ? note.study_categories : null,
         title: note.title,
         notes: note.notes,
-        date: note.created_at
+        date: toStudyDate(note.study_date)
       });
     });
   }
@@ -108,8 +110,8 @@ export class UpdateBibleStudyNotePage implements OnInit {
     return this.updateBibleStudyNoteForm.get('verses')?.value;
   }
 
-  categories(): BibleStudyCategory {
-    return this.updateBibleStudyNoteForm.get('categories')?.value;
+  categories(): BibleStudyCategory[] {
+    return this.updateBibleStudyNoteForm.get('categories')?.value ?? [];
   }
 
   title(): string {
@@ -124,6 +126,10 @@ export class UpdateBibleStudyNotePage implements OnInit {
     return this.updateBibleStudyNoteForm.get('date')?.value;
   }
 
+  /**
+   * Validates the form and, if valid, dispatches an update request with the
+   * edited fields merged into the existing note.
+   */
   submitBibleStudyNote(): void {
     if (this.updateBibleStudyNoteForm.invalid) {
       this.updateBibleStudyNoteForm.markAllAsTouched();
@@ -133,13 +139,11 @@ export class UpdateBibleStudyNotePage implements OnInit {
     this.payload.book = this.book();
     this.payload.chapter = this.chapter();
     this.payload.verses = this.verses();
-    this.payload.study_categories = [this.categories()];
+    this.payload.study_categories = this.categories();
     this.payload.title = this.title();
     this.payload.notes = this.notes();
 
-    if (this.date()) {
-      this.payload.created_at = new Date(this.date());
-    }
+    this.payload.study_date = toStudyDate(this.date());
 
     // Dispatch an NgRx action
     this.store.dispatch(UpdateBibleStudyActions.updateBibleStudyNoteRequest({ request: { id: this.payload.id, updates: this.payload } }));

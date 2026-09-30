@@ -17,6 +17,16 @@
       (ionBlur)="control()?.markAsTouched()">
     </ion-input>
   }
+  @if (type() === 'notes') {
+    <ion-textarea
+      [placeholder]="placeholder()"
+      [autoGrow]="true"
+      [rows]="4"
+      [value]="control()?.value ?? ''"
+      (ionInput)="control()?.setValue($event.detail.value ?? '')"
+      (ionBlur)="control()?.markAsTouched()">
+    </ion-textarea>
+  }
   @if (type() === 'category') {
     <ion-list>
       <ion-item>
@@ -34,17 +44,22 @@
     </ion-list>
   }
   @if (type() === 'date') {
-    <ion-datetime-button>
+    <ion-datetime-button [attr.datetime]="datetimeId">
     </ion-datetime-button>
 
     <ion-modal [keepContentsMounted]="true">
       <ng-template>
         <ion-datetime
+          [id]="datetimeId"
           presentation="date"
           [value]="control()?.value"
-          (ionChange)="control()?.setValue($event.detail.value)">
+          (ionChange)="control()?.setValue($event.detail.value)"
+          (ionBlur)="control()?.markAsTouched()">
         </ion-datetime>
       </ng-template>
     </ion-modal>
+  }
+  @if (showError(control())) {
+    <p class="text-sm text-red-600">{{ title() }} is required</p>
   }
 </div>

@@ -11,7 +11,8 @@ export interface LoginPayload {
 export interface LoginResponse {
   accessToken: string,
   accountStatus: string,
-  username: string
+  username: string,
+  userId: string
 }
 
 @Injectable({

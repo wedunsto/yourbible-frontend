@@ -23,7 +23,7 @@ export class LoginEffects {
                 this.loginService.loginToAccount({ username, password }).pipe(
                     // Map the back-end response to another action
                     // Sending the response to authenticating an existing account to the front-end
-                    map(({ accessToken, accountStatus, username }: LoginResponse) => accountAuthenticatedSuccess({ accessToken, accountStatus, username })),
+                    map(({ accessToken, accountStatus, username, userId }: LoginResponse) => accountAuthenticatedSuccess({ accessToken, accountStatus, username, userId })),
                     // TODO: Handle errors
                     catchError((error) => {
                         console.error('Error authenticating new account', error);

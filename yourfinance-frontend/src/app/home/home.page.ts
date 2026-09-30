@@ -16,6 +16,7 @@ import { selectUsername } from '../core/states/authentication/welcome/welcome.fe
 import { selectBibleStudyNotes } from '../core/states/bible-study-notes/bible-study-notes.feature';
 import { BibleStudyNotesListComponent } from './components/bible-study-notes-list/bible-study-notes-list.component';
 import { readBibleStudyNotesRequest } from '../core/states/bible-study-notes/read/read.actions';
+import { selectUserId } from '../core/states/authentication/login/login.feature';
 
 @Component({
   selector: 'app-home',
@@ -37,20 +38,25 @@ import { readBibleStudyNotesRequest } from '../core/states/bible-study-notes/rea
 })
 export class HomePage implements OnInit {
 username: string = '';
-  bibleStudyNotes: Array<BibleStudyNote> = [];
+userId: string = '';
+bibleStudyNotes: Array<BibleStudyNote> = [];
   
   constructor(
     private store: Store
   ) { }
 
     fetchBibleStudyNotes = () => {
-    this.store.dispatch(readBibleStudyNotesRequest({ request: {username: this.username} }))
+    this.store.dispatch(readBibleStudyNotesRequest({ request: {userId: this.userId} }))
   }
 
   ngOnInit() {
     // Get the username from the NgRx store
     this.store.select(selectUsername).subscribe((username: string) => {
       this.username = username;
+    });
+
+    this.store.select(selectUserId).subscribe((userId: string) => {
+      this.userId = userId;
     });
 
     this.fetchBibleStudyNotes();

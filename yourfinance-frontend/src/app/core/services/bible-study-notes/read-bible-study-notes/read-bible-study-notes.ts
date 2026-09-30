@@ -5,7 +5,7 @@ import { BibleStudyNote } from '../../../models/BibleStudyNote.model';
 import { environment } from '../../../../../environments/environment';
 
 export interface ReadBibleStudyNotesRequest {
-  username: string
+  userId: string
 }
 
 export interface ReadBibleStudyNotesResponse {
@@ -22,7 +22,7 @@ export class ReadBibleStudyNotes {
 
   public readBibleStudyNotes(request: ReadBibleStudyNotesRequest): Observable<ReadBibleStudyNotesResponse> {
     return this.http.get<Array<BibleStudyNote>>(
-      `${this.base}${this.bibleStudyNotesEndpoint}?username=${request.username}`
+      `${this.base}${this.bibleStudyNotesEndpoint}?userId=${request.userId}`
     ).pipe(
       map((bibleStudyNotes) => ({ bibleStudyNotes }))
     );

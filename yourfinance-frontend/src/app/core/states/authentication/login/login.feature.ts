@@ -8,6 +8,7 @@ export interface LoginState {
     accessToken: string,
     accountStatus: string,
     username: string,
+    userId: string,
     error: unknown | null,
 }
 
@@ -16,14 +17,16 @@ const initialState: LoginState = {
     accessToken: '',
     accountStatus: '',
     username: '',
+    userId: '',
     error: null,
 }
 
 // The reducer uses this function to update the state of username and account status values
-const updateState = (state: LoginState, { accessToken, accountStatus, username }: LoginState) => ({
+const updateState = (state: LoginState, { accessToken, accountStatus, username, userId }: LoginState) => ({
     ...state,
     accessToken,
     accountStatus,
+    userId,
     username
 });
 
@@ -32,19 +35,17 @@ export const LoginFeature = createFeature({
     name: 'login',
     reducer: createReducer(
         initialState,
-        on(accountAuthenticatedSuccess, (state, { accessToken, accountStatus, username }) => ({
+        on(accountAuthenticatedSuccess, (state, { accessToken, accountStatus, username, userId }) => ({
             ...state,
             accessToken,
             accountStatus,
             username,
+            userId,
             error: null
         })),
 
         on(accountAuthenticatedFailure, (state, { error }) => ({
             ...state,
-            accessToken: '',
-            accountStatus: '',
-            username: '',
             error
         }))
         ),
@@ -65,4 +66,5 @@ export const {
     selectAccessToken,
     selectAccountStatus,
     selectUsername,
+    selectUserId,
 } = LoginFeature;
